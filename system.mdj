@@ -7219,9 +7219,9 @@
 										"$ref": "AAAAAAFsFJ4TOV6j5jE="
 									},
 									"font": "Arial;13;0",
-									"left": 698,
+									"left": 697,
 									"top": 617,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -11520,7 +11520,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFsFH2kbyNuaSE="
 							},
-							"name": "float r"
+							"name": "float r",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -11528,7 +11529,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFsFH2kbyNuaSE="
 							},
-							"name": "float g"
+							"name": "float g",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -11536,7 +11538,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFsFH2kbyNuaSE="
 							},
-							"name": "float b"
+							"name": "float b",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -11663,7 +11666,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFsFH9OQiYT8rU="
 							},
-							"name": "Color kd"
+							"name": "Color kd",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -11671,7 +11675,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFsFH9OQiYT8rU="
 							},
-							"name": "Color ks"
+							"name": "Color ks",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -11679,7 +11684,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFsFH9OQiYT8rU="
 							},
-							"name": "Color ka"
+							"name": "Color ka",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -11687,7 +11693,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFsFH9OQiYT8rU="
 							},
-							"name": "Color kr"
+							"name": "Color kr",
+							"type": ""
 						}
 					]
 				},
@@ -11705,7 +11712,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFsFIFQKCiGRsk="
 							},
-							"name": "float x"
+							"name": "float x",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -11713,7 +11721,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFsFIFQKCiGRsk="
 							},
-							"name": "floay y"
+							"name": "floay y",
+							"type": ""
 						}
 					]
 				},
@@ -11793,7 +11802,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFsFIIIOipWHZc="
 							},
-							"name": "float t_hit"
+							"name": "float t_hit",
+							"type": ""
 						}
 					]
 				},
@@ -11937,7 +11947,8 @@
 									"_parent": {
 										"$ref": "AAAAAAFsFIqVF0QQvqw="
 									},
-									"name": "Ray ray"
+									"name": "Ray ray",
+									"type": ""
 								}
 							]
 						},
@@ -12434,7 +12445,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFsFMpuvDKj9JY="
 							},
-							"name": "BufferedImage"
+							"name": "BufferedImage",
+							"type": ""
 						}
 					],
 					"operations": [
