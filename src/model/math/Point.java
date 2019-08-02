@@ -21,11 +21,21 @@ public class Point {
         return z;
     }
 
-    public Vector add(Point p){
-        return new Vector(x + p.getX(), y + p.getY(), z + p.getZ());
-    }
 
     public Vector subtract(Point p){
         return new Vector(x - p.getX(), y - p.getY(), z - p.getZ());
     }
+
+    public Point add(Vector vector){
+        return new Point(this.x + vector.getX(), this.y + vector.getY(), this.z + vector.getZ());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        return super.equals(obj) || obj instanceof Point ? (Math.abs(((Point)obj).getX() - this.x) <= 10e-7 &&
+         Math.abs(((Point)obj).getY() - this.y) <= 10e-7
+               && Math.abs(((Point)obj).getZ() - this.z) <= 10e-7) : false;
+    }
+
 }

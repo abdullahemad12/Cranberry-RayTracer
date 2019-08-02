@@ -1,4 +1,4 @@
-package model.math.tests;
+package model.tests;
 
 
 import model.math.Point;
@@ -24,21 +24,7 @@ public class PointTest {
         Assert.assertEquals(y, p.getY(), 0);
         Assert.assertEquals(z, p.getZ(), 0);
     }
-    @Test
-    public void addTest(){
-        Vector vec = new Vector(87.49, 99.933423, 460766.975);
 
-        Vector res12 = vec1.add(vec2);
-        Vector res21 = vec2.add(vec1);
-
-        Assert.assertEquals(res12.getX(), vec.getX(), 0.000001);
-        Assert.assertEquals(res12.getY(), vec.getY(), 0.000001);
-        Assert.assertEquals(res12.getZ(), vec.getZ(), 0.000001);
-
-        Assert.assertEquals(res21.getX(), vec.getX(), 0.000001);
-        Assert.assertEquals(res21.getY(), vec.getY(), 0.000001);
-        Assert.assertEquals(res21.getZ(), vec.getZ(), 0.000001);
-    }
 
     @Test
     public void subtractTest(){

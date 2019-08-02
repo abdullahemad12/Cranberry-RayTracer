@@ -1,4 +1,4 @@
-package model.math.tests;
+package model.tests;
 
 import model.math.Vector;
 import model.math.transformation.Matrix;
