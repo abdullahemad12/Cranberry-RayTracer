@@ -1,5 +1,3 @@
-package model.tests;
-
 import model.graphics.object.Color;
 import org.junit.Assert;
 import org.junit.Before;

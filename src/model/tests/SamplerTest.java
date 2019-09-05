@@ -1,5 +1,3 @@
-package model.tests;
-
 import exceptions.InvalidSampleException;
 import model.screen.Sample;
 import model.screen.Sampler;

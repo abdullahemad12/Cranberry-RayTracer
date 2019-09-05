@@ -1,5 +1,3 @@
-package model.tests;
-
 import exceptions.PointOutOfRangeException;
 import model.graphics.Ray;
 import model.math.Point;
@@ -29,13 +27,14 @@ public class RayTest {
             r.ray(100.1);
             Assert.fail("Should throw an Exception when given 100.1");
         } catch (PointOutOfRangeException e) {
-
+            Assert.assertTrue(true);
         }
 
         try{
             r.ray(-100.1);
             Assert.fail("Should throw an Exception when given -100.1");
         } catch (PointOutOfRangeException e){
+            Assert.assertTrue(true);
 
         }
 
@@ -44,6 +43,7 @@ public class RayTest {
             Assert.fail("Should throw an Exception when given 150");
 
         } catch (PointOutOfRangeException e){
+            Assert.assertTrue(true);
 
         }
 
@@ -52,6 +52,7 @@ public class RayTest {
             Assert.fail("Should throw an Exception when given -150");
 
         } catch (PointOutOfRangeException e){
+            Assert.assertTrue(true);
 
         }
 
@@ -103,6 +104,7 @@ public class RayTest {
             Assert.assertTrue(expected.equals(actual));
 
         }catch (PointOutOfRangeException e){
+            Assert.assertTrue(true);
 
         }
 
@@ -123,6 +125,7 @@ public class RayTest {
             Assert.assertTrue(expected.equals(actual));
 
         }catch (PointOutOfRangeException e){
+            Assert.assertTrue(true);
 
         }
 

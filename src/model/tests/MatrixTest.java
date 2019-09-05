@@ -1,5 +1,3 @@
-package model.tests;
-
 import model.math.Vector;
 import model.math.transformation.Matrix;
 import model.math.transformation.Rotation;

@@ -1,6 +1,3 @@
-package model.tests;
-
-
 import model.math.Vector;
 import org.junit.*;
 

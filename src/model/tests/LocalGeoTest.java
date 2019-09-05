@@ -1,5 +1,3 @@
-package model.tests;
-
 import model.graphics.LocalGeo;
 import model.math.Normal;
 import model.math.Point;

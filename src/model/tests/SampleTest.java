@@ -1,5 +1,3 @@
-package model.tests;
-
 import model.screen.Sample;
 import org.junit.Assert;
 import org.junit.Test;
