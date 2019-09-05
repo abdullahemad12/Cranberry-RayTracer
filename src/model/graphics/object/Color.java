@@ -26,19 +26,16 @@ public class Color {
     }
 
     public void add(Color c) {
-       // this.r = (this.r + c.r) > 1 ? 1 : (this.r + c.r);
+        this.r = (this.r + c.r) % 1.00000001;
+        this.g = (this.g + c.g) % 1.00000001;
+        this.b = (this.b + c.b) % 1.00000001;
     }
 
     public void subtract(Color c) {
-
+        this.r = (this.r - c.r) % 1.00000001;
+        this.g = (this.g - c.g) % 1.00000001;
+        this.b = (this.b - c.b) % 1.00000001;
     }
 
-    public void multiply(double a) {
-
-    }
-
-    public void divide(double a) {
-
-    }
 
 }
