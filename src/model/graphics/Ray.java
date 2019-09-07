@@ -20,6 +20,8 @@ public class Ray {
     public Ray(Point pos, Vector dir){
         this.pos = pos;
         this.dir = dir;
+        t_min = 0;
+        t_max = 1;
     }
 
     public Point ray(double t) throws PointOutOfRangeException{

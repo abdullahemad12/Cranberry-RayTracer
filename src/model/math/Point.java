@@ -33,8 +33,8 @@ public class Point {
     @Override
     public boolean equals(Object obj) {
 
-        return super.equals(obj) || obj instanceof Point ? (Math.abs(((Point)obj).getX() - this.x) <= 10e-7 &&
-         Math.abs(((Point)obj).getY() - this.y) <= 10e-7
+        return super.equals(obj) || obj instanceof Point ? (Math.abs(((Point)obj).getX() - this.x) <= 10e-3 &&
+         Math.abs(((Point)obj).getY() - this.y) <= 10e-3
                && Math.abs(((Point)obj).getZ() - this.z) <= 10e-7) : false;
     }
 
