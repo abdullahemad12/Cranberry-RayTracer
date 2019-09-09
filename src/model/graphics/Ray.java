@@ -21,7 +21,7 @@ public class Ray {
         this.pos = pos;
         this.dir = dir;
         t_min = 0;
-        t_max = 1;
+        t_max = 100;
     }
 
     public Point ray(double t) throws PointOutOfRangeException{
@@ -31,4 +31,7 @@ public class Ray {
         }
         return this.pos.add(this.dir.multiply(t));
     }
+
+    public Point getPos() { return pos;}
+    public Vector getDir() { return dir; }
 }

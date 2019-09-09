@@ -25,6 +25,9 @@ public class Camera {
      * @param eye the location of the eye (look-from) as a 3D point
      * @param center the location of the eye (look-at) as a 3D point
      * @param up the up vector
+     * @param width the width of the screen
+     * @param height the height of the screen
+     * @param fovy the field of view in the y direction
      */
     public Camera(Point eye, Point center, Vector up, int width, int height, double fovy) {
         Vector a = eye.subtract(center);
@@ -71,7 +74,7 @@ public class Camera {
         Vector dir = alphaU.subtract(betaV).subtract(w);
         dir = dir.normalize();
 
-        Ray ray = new Ray(eye, dir);
-        return ray;
+
+        return new Ray(eye, dir);
     }
 }

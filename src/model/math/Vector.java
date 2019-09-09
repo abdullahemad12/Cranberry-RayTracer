@@ -51,8 +51,17 @@ public class Vector {
     public double magnitude(){
         return Math.sqrt((x * x) + (y * y) + (z * z));
     }
-    public Vector normalize(){
+
+    public Normal normalize(){
         double magn = magnitude();
-        return new Vector(x / magn, y / magn, z / magn);
+        return new Normal(x / magn, y / magn, z / magn);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        return super.equals(obj) || obj instanceof Vector ? (Math.abs(((Vector)obj).getX() - this.x) <= 10e-3 &&
+                Math.abs(((Vector)obj).getY() - this.y) <= 10e-3
+                && Math.abs(((Vector)obj).getZ() - this.z) <= 10e-7) : false;
     }
 }
