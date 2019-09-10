@@ -7,6 +7,12 @@ import model.math.Normal;
 import model.math.Point;
 import model.math.Vector;
 
+/**
+ * @author Abdullah Emad
+ * This class represents a sphere in the world. A sphere is represented
+ * by the coordinates of its center and the length of its radius
+ * The Sphere class implements the Shape interface
+ */
 public class Sphere implements Shape {
 
     private BRDF brdf;
@@ -76,6 +82,6 @@ public class Sphere implements Shape {
 
     @Override
     public BRDF getBRDF() {
-        return null;
+        return this.brdf;
     }
 }
