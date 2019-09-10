@@ -7,7 +7,7 @@ import model.graphics.object.Sphere;
 import model.math.Normal;
 import model.math.Point;
 import model.math.Vector;
-import model.screen.Sample;
+import model.graphics.Sample;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -73,9 +73,9 @@ public class SphereTest {
 
 
                     Vector n = pos_expected.subtract(center).normalize();
-                    Assert.assertTrue(lg.getPos().equals(pos_expected));
+                    Assert.assertEquals(lg.getPos(), (pos_expected));
 
-                    Assert.assertTrue(lg.getNormal().equals(n));
+                    Assert.assertEquals(lg.getNormal(), n);
 
                 } catch(PointOutOfRangeException e) {
                     Assert.fail("Should not throw a PointOutOfRangeException!");
@@ -107,8 +107,8 @@ public class SphereTest {
             Normal n = pos_expected.subtract(eye).normalize();
 
 
-            Assert.assertTrue(lg.getNormal().equals(n));
-            Assert.assertTrue(lg.getPos().equals(pos_expected));
+            Assert.assertEquals(lg.getNormal(), (n));
+            Assert.assertEquals(lg.getPos(), (pos_expected));
 
         } catch (PointOutOfRangeException e) {
             Assert.fail("Should not throw a PointOutOfRangeException!");

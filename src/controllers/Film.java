@@ -2,11 +2,12 @@ package controllers;
 
 import exceptions.IncompleteImageException;
 import model.graphics.object.Color;
-import model.screen.Sample;
+import model.graphics.Sample;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * The Film class is responsible for writing
@@ -18,6 +19,7 @@ public class Film {
     private BufferedImage image;
     private int nCommited;
     private boolean[][] pixelCommited;
+    private String outputFileName = "out.png";
 
     /**
      *
@@ -28,6 +30,11 @@ public class Film {
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         nCommited = 0;
         pixelCommited = new boolean[height][width];
+    }
+
+    public Film(int width, int height, String outputFileName){
+        this(width, height);
+        this.outputFileName = outputFileName;
     }
 
     /**
@@ -52,15 +59,15 @@ public class Film {
 
     /**
      * writes the Film into a jpg image file called named.jpg in the same directory
-     * @throws Exception
+     * @throws Exception throws an Exception if the image was not fully committed or an IOException occurs
      */
     public void writeImage() throws Exception {
         if(nCommited != (image.getWidth() * image.getHeight())){
             throw new IncompleteImageException();
         }
-        boolean ret = ImageIO.write(image, "png", new File("out.png"));
+        boolean ret = ImageIO.write(image, "png", new File(outputFileName));
         if(!ret){
-            throw new Exception();
+            throw new IOException();
         }
     }
 }

@@ -22,7 +22,7 @@ public class RayTest {
         Point p = new Point(1, 0, 1);
 
         Ray r = new Ray(p, v);
-
+        Ray.setTMin(-100);
         try {
             r.ray(100.1);
             Assert.fail("Should throw an Exception when given 100.1");
@@ -101,7 +101,7 @@ public class RayTest {
 
         try {
             Point actual = r.ray(t);
-            Assert.assertTrue(expected.equals(actual));
+            Assert.assertEquals(expected, (actual));
 
         }catch (PointOutOfRangeException e){
             Assert.assertTrue(true);
@@ -122,7 +122,7 @@ public class RayTest {
 
         try {
             Point actual = r.ray(t);
-            Assert.assertTrue(expected.equals(actual));
+            Assert.assertEquals(expected, actual);
 
         }catch (PointOutOfRangeException e){
             Assert.assertTrue(true);

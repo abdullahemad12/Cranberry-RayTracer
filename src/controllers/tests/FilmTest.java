@@ -2,7 +2,7 @@ import controllers.Film;
 import exceptions.IncompleteImageException;
 import exceptions.InvalidSampleException;
 import model.graphics.object.Color;
-import model.screen.Sample;
+import model.graphics.Sample;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

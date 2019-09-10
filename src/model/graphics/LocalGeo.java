@@ -27,4 +27,11 @@ public class LocalGeo {
     public Normal getNormal() {
         return this.normal;
     }
+
+    @Override
+    public boolean equals(Object obj){
+        return this == obj || (obj instanceof LocalGeo) &&
+                (this.thit == ((LocalGeo)obj).getThit() && this.pos.equals(((LocalGeo)obj).getPos())
+                        && this.getNormal().equals(((LocalGeo)obj).getNormal()));
+    }
 }

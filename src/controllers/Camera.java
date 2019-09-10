@@ -3,7 +3,7 @@ package controllers;
 import model.graphics.Ray;
 import model.math.Point;
 import model.math.Vector;
-import model.screen.Sample;
+import model.graphics.Sample;
 
 /**
  * @author Abdullah Emad

@@ -1,5 +1,6 @@
-package model.screen;
+package controllers;
 import exceptions.InvalidSampleException;
+import model.graphics.Sample;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;

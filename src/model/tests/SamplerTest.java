@@ -1,6 +1,6 @@
 import exceptions.InvalidSampleException;
-import model.screen.Sample;
-import model.screen.Sampler;
+import model.graphics.Sample;
+import controllers.Sampler;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-import model.screen.Sample;
+import model.graphics.Sample;
 import org.junit.Assert;
 import org.junit.Test;
 import exceptions.InvalidSampleException;

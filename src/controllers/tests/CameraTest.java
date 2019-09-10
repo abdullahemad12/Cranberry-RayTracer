@@ -2,7 +2,7 @@ import controllers.Camera;
 import model.graphics.Ray;
 import model.math.Point;
 import model.math.Vector;
-import model.screen.Sample;
+import model.graphics.Sample;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -68,11 +68,11 @@ public class CameraTest {
             Ray r5 = camera.generateRay(new Sample(j5, i5));
 
             for(double t = 0; t <= 1.0; t = t + 0.01){
-                Assert.assertTrue(r1E.ray(t).equals(r1.ray(t)));
-                Assert.assertTrue(r2E.ray(t).equals(r2.ray(t)));
-                Assert.assertTrue(r3E.ray(t).equals(r3.ray(t)));
-                Assert.assertTrue(r4E.ray(t).equals(r4.ray(t)));
-                Assert.assertTrue(r5E.ray(t).equals(r5.ray(t)));
+                Assert.assertEquals(r1E.ray(t), r1.ray(t));
+                Assert.assertEquals(r2E.ray(t), (r2.ray(t)));
+                Assert.assertEquals(r3E.ray(t), (r3.ray(t)));
+                Assert.assertEquals(r4E.ray(t), (r4.ray(t)));
+                Assert.assertEquals(r5E.ray(t), (r5.ray(t)));
             }
         }
         catch(Exception exception) {

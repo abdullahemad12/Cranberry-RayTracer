@@ -1,6 +1,6 @@
 package exceptions;
 
-import model.screen.Sample;
+import model.graphics.Sample;
 
 public class InvalidSampleException extends Exception {
 
