@@ -1,4 +1,4 @@
-import controllers.Camera;
+import controllers.scene.Camera;
 import exceptions.InvalidSampleException;
 import exceptions.PointOutOfRangeException;
 import model.graphics.LocalGeo;
@@ -8,7 +8,7 @@ import model.math.Normal;
 import model.math.Point;
 import model.math.Vector;
 import model.graphics.Sample;
-import controllers.Sampler;
+import controllers.scene.Sampler;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

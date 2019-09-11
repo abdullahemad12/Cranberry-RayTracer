@@ -6,6 +6,7 @@ import model.graphics.Ray;
 import model.math.Normal;
 import model.math.Point;
 import model.math.Vector;
+import model.math.transformation.Matrix;
 
 /**
  * @author Abdullah Emad
@@ -78,6 +79,13 @@ public class Sphere implements Shape {
         }
 
         return true;
+    }
+
+    @Override
+    public void transform(Matrix matrix) {
+        Vector newCenter = center.subtract(new Point(0, 0, 0));
+        newCenter = matrix.transform(newCenter);
+        center = new Point(newCenter.getX(), newCenter.getY(), newCenter.getZ());
     }
 
     @Override

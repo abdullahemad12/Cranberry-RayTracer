@@ -1,4 +1,4 @@
-package controllers;
+package controllers.scene;
 
 import model.graphics.Ray;
 import model.math.Point;

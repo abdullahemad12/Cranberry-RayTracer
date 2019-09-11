@@ -1,4 +1,4 @@
-import controllers.Camera;
+import controllers.scene.Camera;
 import exceptions.InvalidSampleException;
 import exceptions.PointOutOfRangeException;
 import model.graphics.LocalGeo;

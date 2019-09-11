@@ -5,12 +5,16 @@ public class BRDF {
     private Color ks;
     private Color ka;
     private Color kr;
+    private Color ke;
+    private double shininess;
 
-    public BRDF(Color kd, Color ks, Color ka, Color kr) {
+    public BRDF(Color kd, Color ks, Color ka, Color kr, Color ke, double shininess) {
         this.kd = kd;
         this.ks = ks;
         this.ka = ka;
         this.kr = kr;
+        this.ke = ke;
+        this.shininess = shininess;
     }
 
 

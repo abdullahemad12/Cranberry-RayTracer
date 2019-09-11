@@ -1,4 +1,4 @@
-import controllers.Film;
+import controllers.scene.Film;
 import exceptions.IncompleteImageException;
 import exceptions.InvalidSampleException;
 import model.graphics.object.Color;

@@ -3,6 +3,7 @@ package model.graphics.object;
 import exceptions.PointOutOfRangeException;
 import model.graphics.LocalGeo;
 import model.graphics.Ray;
+import model.math.transformation.Matrix;
 
 /**
  * @author Abdullah Emad
@@ -27,6 +28,12 @@ public interface Shape {
      * @return true if the ray intersects with this shape, false otherwise
      */
     boolean doesIntersect(Ray ray);
+
+    /**
+     * Performs the given transformation on this shape
+     * @param matrix the matrix that represents the desired transformation
+     */
+    void transform(Matrix matrix);
 
     /**
      * Getter for the BRDF

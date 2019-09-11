@@ -1,4 +1,4 @@
-import controllers.Camera;
+import controllers.scene.Camera;
 import model.graphics.Ray;
 import model.math.Point;
 import model.math.Vector;

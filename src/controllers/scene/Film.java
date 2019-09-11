@@ -1,4 +1,4 @@
-package controllers;
+package controllers.scene;
 
 import exceptions.IncompleteImageException;
 import model.graphics.object.Color;

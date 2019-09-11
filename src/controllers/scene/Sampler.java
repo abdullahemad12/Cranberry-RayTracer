@@ -1,4 +1,4 @@
-package controllers;
+package controllers.scene;
 import exceptions.InvalidSampleException;
 import model.graphics.Sample;
 import org.jetbrains.annotations.NotNull;
