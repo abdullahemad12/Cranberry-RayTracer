@@ -121,6 +121,7 @@ public class Parser {
 
         String line;
         while((line = br.readLine()) != null) {
+            line = line.trim().replaceAll("\\s+", " ");
             String[] command = line.split(" ");
             Transitions transition = fsm.takeAction(command[0]);
 
@@ -137,7 +138,7 @@ public class Parser {
                 case ROTATE: parseRotate(command); break;
                 case SCALE: parseScale(command); break;
                 case PUSH_TRANSFORM: pushTransform(command); break;
-                case POP_TRANSFORM: popTransform(command);
+                case POP_TRANSFORM: popTransform(command); break;
                 case DIRECTIONAL: parseDirectionLight(command); break;
                 case POINT: parsePointLight(command); break;
                 case ATTENUATION: parseAttentuation(command); break;
@@ -179,6 +180,12 @@ public class Parser {
             throw new InvalidStateException("\"output\" command expects one parameters but was given: " + (command.length - 1));
         }
         outputfilename = command[1];
+
+        String[] check = outputfilename.split("\\.");
+        if(!check[check.length - 1].equals("png")) {
+            throw new InvalidStateException("\"output\" command error: the only supported image format is png");
+        }
+
     }
 
     private void parseCamera(String[] command) throws InvalidStateException {
@@ -187,7 +194,7 @@ public class Parser {
         }
 
         for(int i = 1; i < command.length; i++) {
-            cameraParameters[i-1] = Integer.parseInt(command[i]);
+            cameraParameters[i-1] = Double.parseDouble(command[i]);
         }
     }
 

@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/controllers/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/model/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/scenes" type="java-test-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

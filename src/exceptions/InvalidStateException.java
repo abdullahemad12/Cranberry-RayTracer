@@ -9,17 +9,17 @@ public class InvalidStateException extends Exception{
     public InvalidStateException(States oldState, Transitions transition){
         super("Invalid File Syntax!");
         if(oldState == States.START){
-            message = "Invalid File Syntax!\nExpected Command: size but found " + transition.getValue() + "instead";
+            message = "Invalid File Syntax!\nExpected Command: size but found " + transition.getValue() + " instead";
         }
         else if(oldState == States.INTERMEDIATE){
-            message = "Invalid File Syntax!\nExpected Command: Camera but found " + transition.getValue() + "instead";
+            message = "Invalid File Syntax!\nExpected Command: Camera but found " + transition.getValue() + " instead";
         }
         else if(oldState ==  States.INTERMEDIATE1){
             if(transition == Transitions.MAX_DEPTH) {
                 message = "Invalid File Syntax!\nDuplicate value for Max Depth";
             }
             else {
-                message = "Invalid File Syntax!\nExpected Command: Camera but found " + transition.getValue() + "instead";
+                message = "Invalid File Syntax!\nExpected Command: Camera but found " + transition.getValue() + " instead";
             }
         }
         else if(oldState == States.INTERMEDIATE2) {
@@ -27,7 +27,7 @@ public class InvalidStateException extends Exception{
                 message = "Invalid File Syntax!\nDuplicate value for Max Depth";
             }
             else {
-                message = "Invalid File Syntax!\nExpected Command: Camera but found " + transition.getValue() + "instead";
+                message = "Invalid File Syntax!\nExpected Command: Camera but found " + transition.getValue() + " instead";
             }
         }
         else if(oldState == States.INTERMEDIATE3) {
@@ -35,7 +35,7 @@ public class InvalidStateException extends Exception{
                 message = "Invalid File Syntax!\nDuplicate value for " + transition.getValue();
             }
             else {
-                message = "Invalid File Syntax!\nExpected Command: Camera but found " + transition.getValue() + "instead";
+                message = "Invalid File Syntax!\nExpected Command: Camera but found " + transition.getValue() + " instead";
             }
         }
         else{
