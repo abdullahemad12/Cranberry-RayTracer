@@ -66,6 +66,10 @@ public class FiniteStateMachine {
 
 
     private Transitions stringToTransitions(String command) {
+
+        if(command.charAt(0) == '#'){
+            return Transitions.COMMENT;
+        }
         Transitions[] transitions = Transitions.values();
         for(Transitions transition : transitions){
             if(transition.getValue().equals(command)){

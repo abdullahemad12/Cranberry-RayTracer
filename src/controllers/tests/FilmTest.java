@@ -66,8 +66,9 @@ public class FilmTest {
         }
 
         BufferedImage image = null;
+        File file = new File("out.png");
         try{
-            image = ImageIO.read(new File("out.png"));
+            image = ImageIO.read(file);
         }
         catch(Exception e){
             Assert.fail("should not throw an Exception! " + e.getMessage());
@@ -91,5 +92,8 @@ public class FilmTest {
                 }
             }
         }
+
+        Assert.assertTrue(file.delete());
+
     }
 }

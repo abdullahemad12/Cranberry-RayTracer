@@ -38,7 +38,7 @@ public class ParserTest {
     @Test
     public void parserTest2() {
         try {
-            parser.parseFile("scenes/scene1.cbg");
+            parser.parseFile("scenesTests/scene1.cbg");
         } catch(Exception e) {
             e.printStackTrace();
             Assert.fail("should not throw an Exception");
@@ -53,7 +53,7 @@ public class ParserTest {
 
         Assert.assertEquals(5, parser.getMaxdepth());
 
-        Assert.assertEquals("out.png", parser.getOutputfilename());
+        Assert.assertNull(parser.getOutputfilename());
 
         Assert.assertEquals(66, parser.getShapes().size());
 
@@ -63,7 +63,7 @@ public class ParserTest {
     @Test
     public void parserTest3() {
         try {
-            parser.parseFile("scenes/scene2.cbg");
+            parser.parseFile("scenesTests/scene2.cbg");
             Assert.fail("Should throw an Exception");
         } catch(Exception e) {
             Assert.assertTrue(true);
@@ -72,7 +72,7 @@ public class ParserTest {
     @Test
     public void parserTest4() {
         try {
-            parser.parseFile("scenes/scene3.cbg");
+            parser.parseFile("scenesTests/scene3.cbg");
             Assert.fail("Should throw an Exception");
         } catch(Exception e) {
             Assert.assertTrue(true);
@@ -81,7 +81,7 @@ public class ParserTest {
     @Test
     public void parserTest5() {
         try {
-            parser.parseFile("scenes/scene4.cbg");
+            parser.parseFile("scenesTests/scene4.cbg");
             Assert.fail("Should throw an Exception");
         } catch(Exception e) {
             Assert.assertTrue(true);
@@ -91,7 +91,7 @@ public class ParserTest {
     @Test
     public void parserTest6() {
         try {
-            parser.parseFile("scenes/scene5.cbg");
+            parser.parseFile("scenesTests/scene5.cbg");
             Assert.fail("Should throw an Exception");
         } catch(Exception e) {
             Assert.assertTrue(true);
@@ -101,7 +101,7 @@ public class ParserTest {
     @Test
     public void parserTest7() {
         try {
-            parser.parseFile("scenes/scene6.cbg");
+            parser.parseFile("scenesTests/scene6.cbg");
         } catch(Exception e) {
             Assert.fail("Should not throw an Exception");
         }

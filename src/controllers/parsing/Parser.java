@@ -111,7 +111,7 @@ public class Parser {
 
         String[] nameComponents = filename.split("\\.");
         if(nameComponents.length != 2 || !nameComponents[1].equals("cbg")){
-            throw new UnkownFileExtensionException();
+            throw new UnkownFileExtensionException(filename);
         }
 
         BufferedReader br = new BufferedReader(new FileReader(filename));
@@ -120,6 +120,7 @@ public class Parser {
         while((line = br.readLine()) != null) {
             line = line.trim().replaceAll("\\s+", " ");
             String[] command = line.split(" ");
+            command = trimCommand(command);
             Transitions transition = fsm.takeAction(command[0]);
 
             switch(transition) {
@@ -433,5 +434,19 @@ public class Parser {
 
     }
 
+    /**
+     * Used to remove comments from the command line
+     * @param command the array of the command and its arguments to be trimmed
+     */
+    private static String[] trimCommand(String[] command) {
+        int count = 0;
+        for(int i = 0; i < command.length && !command[i].equals("#") && command[i].charAt(0) != '#'; i++){
+            ++count;
+        }
+
+        String[] newCommand = new String[count];
+        System.arraycopy(command, 0, newCommand, 0, newCommand.length);
+        return newCommand;
+    }
 
 }

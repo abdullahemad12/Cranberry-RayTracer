@@ -6,7 +6,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/controllers/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/model/tests" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/scenes" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/scenesTests" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/scenes" type="java-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -51,6 +52,19 @@
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/commons-cli-1.4-bin/commons-cli-1.4/commons-cli-1.4.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/Downloads/commons-cli-1.4-bin/commons-cli-1.4/commons-cli-1.4-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/Downloads/commons-cli-1.4-bin/commons-cli-1.4/commons-cli-1.4-sources.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
   </component>
