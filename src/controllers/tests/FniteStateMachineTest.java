@@ -15,7 +15,7 @@ public class FniteStateMachineTest {
     @Test
     public void FiniteStateMachineTest1(){
         try{
-            fsm.takeAction("unkown");
+            fsm.takeAction("unkown", 0);
             Assert.fail("Should throw an Exception!");
         } catch (InvalidStateException e){
             Assert.assertTrue(true);
@@ -26,7 +26,7 @@ public class FniteStateMachineTest {
     @Test
     public void FiniteStateMachineTest2() {
         try {
-            fsm.takeAction("output");
+            fsm.takeAction("output",0 );
             Assert.fail("Should throw an Exception!");
         } catch (InvalidStateException e){
             Assert.assertTrue(true);
@@ -39,10 +39,10 @@ public class FniteStateMachineTest {
     public void FiniteStateMachineTest3() {
         try {
             for(int i = 0; i < 50; i++) {
-                Assert.assertEquals(Transitions.BLANK_LINE, fsm.takeAction(""));
-                Assert.assertEquals(Transitions.COMMENT, fsm.takeAction("#"));
+                Assert.assertEquals(Transitions.BLANK_LINE, fsm.takeAction("", 0));
+                Assert.assertEquals(Transitions.COMMENT, fsm.takeAction("#", 0));
             }
-            Assert.assertEquals(Transitions.SIZE, fsm.takeAction("size"));
+            Assert.assertEquals(Transitions.SIZE, fsm.takeAction("size", 0));
 
         } catch (InvalidStateException e){
             Assert.fail("should not throw an Exception");
@@ -51,7 +51,7 @@ public class FniteStateMachineTest {
         }
 
         try {
-            fsm.takeAction("size");
+            fsm.takeAction("size",0 );
             Assert.fail("Should throw an Exception!");
         } catch (InvalidStateException e){
             Assert.assertTrue(true);
@@ -63,7 +63,7 @@ public class FniteStateMachineTest {
     @Test
     public void FiniteStateMachineTest4() {
         try {
-            fsm.takeAction("size");
+            fsm.takeAction("size", 0);
 
         } catch (InvalidStateException e){
             Assert.fail("should not throw an Exception");
@@ -72,9 +72,9 @@ public class FniteStateMachineTest {
         }
 
         try {
-            Assert.assertEquals(Transitions.OUTPUT, fsm.takeAction("output"));
-            Assert.assertEquals(Transitions.MAX_DEPTH, fsm.takeAction("maxdepth"));
-            Assert.assertEquals(Transitions.CAMERA, fsm.takeAction("camera"));
+            Assert.assertEquals(Transitions.OUTPUT, fsm.takeAction("output", 0));
+            Assert.assertEquals(Transitions.MAX_DEPTH, fsm.takeAction("maxdepth", 0));
+            Assert.assertEquals(Transitions.CAMERA, fsm.takeAction("camera",  0));
 
 
         } catch (InvalidStateException e){
@@ -86,7 +86,7 @@ public class FniteStateMachineTest {
     @Test
     public void FiniteStateMachineTest5() {
         try {
-            fsm.takeAction("size");
+            fsm.takeAction("size",0);
 
         } catch (InvalidStateException e){
             Assert.fail("should not throw an Exception");
@@ -95,8 +95,8 @@ public class FniteStateMachineTest {
         }
 
         try {
-            fsm.takeAction("maxdepth");
-            fsm.takeAction("camera");
+            fsm.takeAction("maxdepth",0 );
+            fsm.takeAction("camera", 0);
 
 
         } catch (InvalidStateException e){
@@ -108,7 +108,7 @@ public class FniteStateMachineTest {
     @Test
     public void FiniteStateMachineTest6() {
         try {
-            fsm.takeAction("size");
+            fsm.takeAction("size",0);
 
         } catch (InvalidStateException e){
             Assert.fail("should not throw an Exception");
@@ -117,8 +117,8 @@ public class FniteStateMachineTest {
         }
 
         try {
-            fsm.takeAction("output");
-            fsm.takeAction("camera");
+            fsm.takeAction("output", 0);
+            fsm.takeAction("camera", 0);
 
 
         } catch (InvalidStateException e){
@@ -131,7 +131,7 @@ public class FniteStateMachineTest {
     @Test
     public void FiniteStateMachineTest7() {
         try {
-            fsm.takeAction("size");
+            fsm.takeAction("size", 0);
 
         } catch (InvalidStateException e){
             Assert.fail("should not throw an Exception");
@@ -141,7 +141,7 @@ public class FniteStateMachineTest {
 
         try {
 
-            fsm.takeAction("camera");
+            fsm.takeAction("camera",0);
 
 
         } catch (InvalidStateException e){
@@ -156,7 +156,7 @@ public class FniteStateMachineTest {
     @Test
     public void FiniteStateMachineTest9() {
         try {
-            fsm.takeAction("size");
+            fsm.takeAction("size", 0);
 
         } catch (InvalidStateException e){
             Assert.fail("should not throw an Exception");
@@ -165,9 +165,9 @@ public class FniteStateMachineTest {
         }
 
         try {
-            fsm.takeAction("maxdepth");
-            fsm.takeAction("camera");
-            fsm.takeAction("maxdepth");
+            fsm.takeAction("maxdepth", 0);
+            fsm.takeAction("camera", 0);
+            fsm.takeAction("maxdepth", 0);
             Assert.fail("should throw an Exception");
 
         } catch (InvalidStateException e){
@@ -179,7 +179,7 @@ public class FniteStateMachineTest {
     @Test
     public void FiniteStateMachineTest10() {
         try {
-            fsm.takeAction("size");
+            fsm.takeAction("size", 0);
 
         } catch (InvalidStateException e){
             Assert.fail("should not throw an Exception");
@@ -188,10 +188,10 @@ public class FniteStateMachineTest {
         }
 
         try {
-            fsm.takeAction("maxdepth");
-            fsm.takeAction("output");
-            fsm.takeAction("camera");
-            fsm.takeAction("maxdepth");
+            fsm.takeAction("maxdepth", 0);
+            fsm.takeAction("output", 0);
+            fsm.takeAction("camera", 0);
+            fsm.takeAction("maxdepth", 0);
             Assert.fail("should throw an Exception");
 
         } catch (InvalidStateException e){
@@ -204,7 +204,7 @@ public class FniteStateMachineTest {
     @Test
     public void FiniteStateMachineTest11() {
         try {
-            fsm.takeAction("size");
+            fsm.takeAction("size", 0);
 
         } catch (InvalidStateException e){
             Assert.fail("should not throw an Exception");
@@ -213,10 +213,10 @@ public class FniteStateMachineTest {
         }
 
         try {
-            fsm.takeAction("maxdepth");
-            fsm.takeAction("output");
-            fsm.takeAction("camera");
-            fsm.takeAction("output");
+            fsm.takeAction("maxdepth", 0);
+            fsm.takeAction("output",0);
+            fsm.takeAction("camera", 9);
+            fsm.takeAction("output",0 );
             Assert.fail("should throw an Exception");
 
         } catch (InvalidStateException e){
@@ -229,15 +229,15 @@ public class FniteStateMachineTest {
     @Test
     public void FiniteStateMachineTest12() {
         try {
-            fsm.takeAction("size");
-            fsm.takeAction("camera");
+            fsm.takeAction("size", 0);
+            fsm.takeAction("camera", 0);
         } catch (InvalidStateException e){
             Assert.fail("should not throw an Exception");
         } catch (Exception e){
             Assert.fail("Another type of Excpetion is thrown " + e.getMessage());
         }
         try {
-            fsm.takeAction("maxdepth");
+            fsm.takeAction("maxdepth", 0);
             Assert.fail("should throw an Exception");
 
         } catch (InvalidStateException e){
@@ -246,7 +246,7 @@ public class FniteStateMachineTest {
             Assert.fail("Another type of Excpetion is thrown " + e.getMessage());
         }
         try {
-            fsm.takeAction("size");
+            fsm.takeAction("size", 0);
             Assert.fail("should throw an Exception");
 
         } catch (InvalidStateException e){
@@ -255,7 +255,7 @@ public class FniteStateMachineTest {
             Assert.fail("Another type of Excpetion is thrown " + e.getMessage());
         }
         try {
-            fsm.takeAction("output");
+            fsm.takeAction("output", 0);
             Assert.fail("should throw an Exception");
 
         } catch (InvalidStateException e){
@@ -264,7 +264,7 @@ public class FniteStateMachineTest {
             Assert.fail("Another type of Excpetion is thrown " + e.getMessage());
         }
         try {
-            fsm.takeAction("camera");
+            fsm.takeAction("camera", 0);
             Assert.fail("should throw an Exception");
 
         } catch (InvalidStateException e){
@@ -275,8 +275,8 @@ public class FniteStateMachineTest {
     }    @Test
     public void FiniteStateMachineTest13() {
         try {
-            fsm.takeAction("size");
-            fsm.takeAction("camera");
+            fsm.takeAction("size", 0);
+            fsm.takeAction("camera", 0);
 
         } catch (InvalidStateException e){
             Assert.fail("should not throw an Exception");
@@ -290,7 +290,7 @@ public class FniteStateMachineTest {
                 continue;
             }
             try {
-                Assert.assertEquals(transition, fsm.takeAction(transition.getValue()));
+                Assert.assertEquals(transition, fsm.takeAction(transition.getValue(), 0));
 
             } catch (InvalidStateException e) {
                 Assert.fail("should not throw an Exception");

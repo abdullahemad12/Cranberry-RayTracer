@@ -41,6 +41,7 @@ public class Parser {
     private FiniteStateMachine fsm;
     private boolean parsed;
     private Attenuation attenuation;
+    private int lineNumber;
 
     private Color ka;
     private Color kd;
@@ -115,13 +116,14 @@ public class Parser {
         }
 
         BufferedReader br = new BufferedReader(new FileReader(filename));
-
+        lineNumber = 1;
         String line;
         while((line = br.readLine()) != null) {
+            line = addCharAfterChar(line, '#', ' ');
             line = line.trim().replaceAll("\\s+", " ");
             String[] command = line.split(" ");
+            Transitions transition = fsm.takeAction(command[0], lineNumber);
             command = trimCommand(command);
-            Transitions transition = fsm.takeAction(command[0]);
 
             switch(transition) {
                 case SIZE: parseSize(command); break;
@@ -146,6 +148,7 @@ public class Parser {
                 case SHININESS: parseShininess(command); break;
                 case EMISSION: parseEmission(command); break;
             }
+            ++lineNumber;
         }
 
 
@@ -160,7 +163,7 @@ public class Parser {
 
     private void parseSize(String[] command) throws InvalidStateException {
         if(command.length != 3) {
-            throw new InvalidStateException("\"size\" command expects two parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"size\" command expects two parameters but was given: " + (command.length - 1));
         }
         int width = Integer.parseInt(command[1]);
         int height = Integer.parseInt(command[2]);
@@ -169,27 +172,27 @@ public class Parser {
 
     private void parseMaxDepth(String[] command) throws InvalidStateException {
         if(command.length != 2) {
-            throw new InvalidStateException("\"maxdepth\" command expects one parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"maxdepth\" command expects one parameters but was given: " + (command.length - 1));
         }
         maxdepth = Integer.parseInt(command[1]);
     }
 
     private void parseOutput(String[] command) throws InvalidStateException {
         if(command.length != 2) {
-            throw new InvalidStateException("\"output\" command expects one parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"output\" command expects one parameters but was given: " + (command.length - 1));
         }
         outputfilename = command[1];
 
         String[] check = outputfilename.split("\\.");
         if(!check[check.length - 1].equals("png")) {
-            throw new InvalidStateException("\"output\" command error: the only supported image format is png");
+            throw new InvalidStateException("Line " + lineNumber +": \"output\" command error: the only supported image format is png");
         }
 
     }
 
     private void parseCamera(String[] command) throws InvalidStateException {
         if(command.length != 11) {
-            throw new InvalidStateException("\"camera\" command expects ten parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"camera\" command expects ten parameters but was given: " + (command.length - 1));
         }
 
         for(int i = 1; i < command.length; i++) {
@@ -199,7 +202,7 @@ public class Parser {
 
     private void parseSphere(String[] command) throws InvalidStateException {
         if(command.length != 5) {
-            throw new InvalidStateException("\"sphere\" command expects four parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"sphere\" command expects four parameters but was given: " + (command.length - 1));
         }
 
         BRDF brdf = new BRDF(kd, ks, ka, kr, ke, shininess);
@@ -217,10 +220,10 @@ public class Parser {
 
     private void parseTriangle(String[] command) throws InvalidStateException {
         if(command.length != 4) {
-            throw new InvalidStateException("\"tri\" command expects three parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"tri\" command expects three parameters but was given: " + (command.length - 1));
         }
         if(vertices == null || verticesCount != maxverts) {
-            throw new InvalidStateException("All vertices Should be defined before calling the \"tri\" command");
+            throw new InvalidStateException("Line " + lineNumber +": All vertices Should be defined before calling the \"tri\" command");
         }
 
         int vertex1Index = Integer.parseInt(command[1]);
@@ -244,7 +247,7 @@ public class Parser {
 
     private void parseMaxVert(String[] command) throws InvalidStateException {
         if(command.length != 2) {
-            throw new InvalidStateException("\"maxverts\" command expects one parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"maxverts\" command expects one parameters but was given: " + (command.length - 1));
         }
 
         maxverts = Integer.parseInt(command[1]);
@@ -254,11 +257,11 @@ public class Parser {
 
     private void parseVertex(String[] command) throws InvalidStateException {
         if(command.length != 4) {
-            throw new InvalidStateException("\"maxverts\" command expects three parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"maxverts\" command expects three parameters but was given: " + (command.length - 1));
         }
 
         if(verticesCount >= maxverts) {
-            throw new InvalidStateException(verticesCount + " vertices are already defined! you can define more!");
+            throw new InvalidStateException("Line " + lineNumber +": " + verticesCount + " vertices are already defined! you can define more!");
         }
         vertices[verticesCount][0] = Double.parseDouble(command[1]);
         vertices[verticesCount][1] = Double.parseDouble(command[2]);
@@ -267,7 +270,7 @@ public class Parser {
 
     private void pushTransform(String[] command) throws InvalidStateException{
         if(command.length != 1) {
-            throw new InvalidStateException("\"pushTransform\" command expects zero parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"pushTransform\" command expects zero parameters but was given: " + (command.length - 1));
         }
 
         stack.push(transformMatrix);
@@ -275,14 +278,14 @@ public class Parser {
 
     private void popTransform(String[] command) throws InvalidStateException {
         if(command.length != 1) {
-            throw new InvalidStateException("\"popTransform\" command expects zero parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"popTransform\" command expects zero parameters but was given: " + (command.length - 1));
         }
         transformMatrix = stack.pop();
     }
 
     private void parseTranslate(String[] command) throws InvalidStateException {
         if(command.length != 4) {
-            throw new InvalidStateException("\"translate\" command expects three parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"translate\" command expects three parameters but was given: " + (command.length - 1));
         }
 
         double x = Double.parseDouble(command[1]);
@@ -296,7 +299,7 @@ public class Parser {
 
     private void parseRotate(String[] command) throws InvalidStateException {
         if(command.length != 5) {
-            throw new InvalidStateException("\"rotate\" command expects three parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"rotate\" command expects three parameters but was given: " + (command.length - 1));
         }
         double x = Double.parseDouble(command[1]);
         double y = Double.parseDouble(command[2]);
@@ -310,7 +313,7 @@ public class Parser {
 
     private void parseScale(String[] command) throws InvalidStateException {
         if(command.length != 4) {
-            throw new InvalidStateException("\"scale\" command expects three parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"scale\" command expects three parameters but was given: " + (command.length - 1));
         }
         double x = Double.parseDouble(command[1]);
         double y = Double.parseDouble(command[2]);
@@ -322,7 +325,7 @@ public class Parser {
 
     private void parseDirectionLight(String[] command) throws InvalidStateException {
         if(command.length != 7) {
-            throw new InvalidStateException("\"directional\" command expects six parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"directional\" command expects six parameters but was given: " + (command.length - 1));
         }
 
         double x = Double.parseDouble(command[1]);
@@ -343,7 +346,7 @@ public class Parser {
 
     private void parsePointLight(String[] command) throws InvalidStateException {
         if(command.length != 7) {
-            throw new InvalidStateException("\"directional\" command expects six parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"directional\" command expects six parameters but was given: " + (command.length - 1));
         }
 
         double x = Double.parseDouble(command[1]);
@@ -365,7 +368,7 @@ public class Parser {
 
     private void parseAttentuation(String[] command) throws InvalidStateException{
         if(command.length != 4) {
-            throw new InvalidStateException("\"attenuation\" command expects three parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"attenuation\" command expects three parameters but was given: " + (command.length - 1));
         }
 
         double constant = Double.parseDouble(command[1]);
@@ -377,7 +380,7 @@ public class Parser {
 
     private void parseAmbient(String[] command) throws InvalidStateException{
         if(command.length != 4) {
-            throw new InvalidStateException("\"ambient\" command expects three parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"ambient\" command expects three parameters but was given: " + (command.length - 1));
         }
 
         double r = Double.parseDouble(command[1]);
@@ -389,7 +392,7 @@ public class Parser {
 
     private void parseDiffuse(String[] command) throws  InvalidStateException {
         if(command.length != 4) {
-            throw new InvalidStateException("\"diffuse\" command expects three parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"diffuse\" command expects three parameters but was given: " + (command.length - 1));
         }
 
         double r = Double.parseDouble(command[1]);
@@ -402,7 +405,7 @@ public class Parser {
 
     private void parseSpecular(String[] command) throws  InvalidStateException {
         if(command.length != 4) {
-            throw new InvalidStateException("\"specular\" command expects three parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"specular\" command expects three parameters but was given: " + (command.length - 1));
         }
 
         double r = Double.parseDouble(command[1]);
@@ -414,7 +417,7 @@ public class Parser {
 
     private void parseShininess(String[] command) throws InvalidStateException {
         if(command.length != 2) {
-            throw new InvalidStateException("\"shininess\" command expects one parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"shininess\" command expects one parameters but was given: " + (command.length - 1));
         }
 
         shininess = Double.parseDouble(command[1]);
@@ -422,7 +425,7 @@ public class Parser {
 
     private void parseEmission(String[] command) throws InvalidStateException {
         if(command.length != 4) {
-            throw new InvalidStateException("\"emission\" command expects three parameters but was given: " + (command.length - 1));
+            throw new InvalidStateException("Line " + lineNumber +": \"emission\" command expects three parameters but was given: " + (command.length - 1));
         }
 
 
@@ -440,13 +443,25 @@ public class Parser {
      */
     private static String[] trimCommand(String[] command) {
         int count = 0;
-        for(int i = 0; i < command.length && !command[i].equals("#") && command[i].charAt(0) != '#'; i++){
+        for(int i = 0; i < command.length && !command[i].equals("#")
+                && command[i].length() > 0 && command[i].charAt(0) != '#'; i++){
             ++count;
         }
 
         String[] newCommand = new String[count];
         System.arraycopy(command, 0, newCommand, 0, newCommand.length);
         return newCommand;
+    }
+
+    private static String addCharAfterChar(String str, char c, char k){
+       StringBuilder res = new StringBuilder(str.length() * 2);
+       for(int i = 0; i < str.length(); i++){
+           res.append(str.charAt(i));
+           if(res.charAt(i) == c) {
+               res.append(k);
+           }
+       }
+       return res.toString();
     }
 
 }

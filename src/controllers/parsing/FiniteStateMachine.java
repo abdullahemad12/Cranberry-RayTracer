@@ -66,10 +66,6 @@ public class FiniteStateMachine {
 
 
     private Transitions stringToTransitions(String command) {
-
-        if(command.charAt(0) == '#'){
-            return Transitions.COMMENT;
-        }
         Transitions[] transitions = Transitions.values();
         for(Transitions transition : transitions){
             if(transition.getValue().equals(command)){
@@ -79,17 +75,17 @@ public class FiniteStateMachine {
 
         return null;
     }
-    public Transitions takeAction(String command) throws InvalidStateException {
+    public Transitions takeAction(String command, int lineNumber) throws InvalidStateException {
         Transitions transitions = stringToTransitions(command);
         if(transitions == null){
-            throw new InvalidStateException("Unknown Command: " + command + "!");
+            throw new InvalidStateException("Line " + lineNumber +  " : Unknown Command: " + command + "!");
         }
 
         States previousState = currentState;
         currentState = transitionMatrix[currentState.getValue()][transitions.getId()];
 
         if(currentState == States.ERROR){
-            throw new InvalidStateException(previousState, transitions);
+            throw new InvalidStateException(previousState, transitions, lineNumber);
         }
         return transitions;
     }

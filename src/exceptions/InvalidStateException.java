@@ -6,8 +6,10 @@ import controllers.parsing.Transitions;
 public class InvalidStateException extends Exception{
 
     private String message;
-    public InvalidStateException(States oldState, Transitions transition){
+    public InvalidStateException(States oldState, Transitions transition, int lineNumber){
         super("Invalid File Syntax!");
+
+        String lineNumberMessage = "Line " + lineNumber + " : ";
         if(oldState == States.START){
             message = "Invalid File Syntax!\nExpected Command: size but found " + transition.getValue() + " instead";
         }
@@ -39,11 +41,13 @@ public class InvalidStateException extends Exception{
             }
         }
         else{
-            message = "Invalid File Syntax!\n Came Across an Invalid command";
+            message = "Invalid File Syntax!\nCame Across an Invalid command";
         }
+
+        message = lineNumberMessage + message;
     }
     public InvalidStateException(String command) {
-        message = "Invalid File Syntax!\n Came Across an Invalid command:\n" + command;
+        message = command;
     }
 
     @Override
