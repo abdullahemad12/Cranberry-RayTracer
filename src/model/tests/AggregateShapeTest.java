@@ -1,10 +1,7 @@
 import controllers.scene.Camera;
 import exceptions.InvalidSampleException;
 import exceptions.PointOutOfRangeException;
-import model.graphics.Intersection;
-import model.graphics.LocalGeo;
-import model.graphics.Ray;
-import model.graphics.Sample;
+import model.graphics.*;
 import model.graphics.object.AggregateShape;
 import model.graphics.object.Shape;
 import model.graphics.object.Sphere;
@@ -34,7 +31,7 @@ public class AggregateShapeTest {
         eye = new Point(-5, 0, 0);
         up = new Vector(0, 5, 0);
 
-        camera = new Camera(eye, center, up, width, height, fovy);
+        camera = new Camera(eye, center, up, new ScreenDimensions(width, height), fovy);
 
     }
 

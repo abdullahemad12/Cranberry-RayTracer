@@ -3,6 +3,7 @@ import exceptions.InvalidSampleException;
 import exceptions.PointOutOfRangeException;
 import model.graphics.LocalGeo;
 import model.graphics.Ray;
+import model.graphics.ScreenDimensions;
 import model.graphics.object.Triangle;
 import model.math.Normal;
 import model.math.Point;
@@ -28,7 +29,7 @@ public class TriangleTest {
         center = new Point(5, 0, 0);
         eye = new Point(-5, 0, 0);
         up = new Vector(0, 5, 0);
-        camera = new Camera(eye, center, up, width, height, fovy);
+        camera = new Camera(eye, center, up, new ScreenDimensions(width, height), fovy);
     }
 
 
@@ -138,7 +139,7 @@ public class TriangleTest {
         Triangle triangle = new Triangle(A, B, C, null);
 
 
-        Sampler sampler = new Sampler(width, height);
+        Sampler sampler = new Sampler(new ScreenDimensions(width, height));
 
         for(Sample sample : sampler) {
             Ray ray = camera.generateRay(sample);

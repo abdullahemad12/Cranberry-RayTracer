@@ -1,6 +1,7 @@
 import exceptions.InvalidSampleException;
 import model.graphics.Sample;
 import controllers.scene.Sampler;
+import model.graphics.ScreenDimensions;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,7 +10,7 @@ public class SamplerTest {
     public void SampleCreationAndIterationTest() throws InvalidSampleException {
         int height = 200;
         int width = 100;
-        Sampler sampler = new Sampler(width, height);
+        Sampler sampler = new Sampler(new ScreenDimensions(width, height));
 
 
 

@@ -1,6 +1,7 @@
 package controllers.scene;
 
 import exceptions.IncompleteImageException;
+import model.graphics.ScreenDimensions;
 import model.graphics.object.Color;
 import model.graphics.Sample;
 
@@ -23,17 +24,23 @@ public class Film {
 
     /**
      *
-     * @param width: the width of the screen
-     * @param height: the height of the screen
+     * @param screenDimensions: The dimensions of the screen
      */
-    public Film(int width, int height) {
+    public Film(ScreenDimensions screenDimensions) {
+        int width = screenDimensions.getWidth();
+        int height = screenDimensions.getHeight();
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         nCommited = 0;
         pixelCommited = new boolean[height][width];
     }
 
-    public Film(int width, int height, String outputFileName){
-        this(width, height);
+    /**
+     *
+     * @param screenDimensions the dimensions of the screen
+     * @param outputFileName the output filename
+     */
+    public Film(ScreenDimensions screenDimensions, String outputFileName){
+        this(screenDimensions);
         this.outputFileName = outputFileName;
     }
 

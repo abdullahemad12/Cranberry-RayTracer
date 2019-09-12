@@ -1,5 +1,6 @@
 import controllers.scene.Camera;
 import model.graphics.Ray;
+import model.graphics.ScreenDimensions;
 import model.math.Point;
 import model.math.Vector;
 import model.graphics.Sample;
@@ -20,7 +21,7 @@ public class CameraTest {
         Point eye = new Point(0.5, 4, -4);
         Point center = new Point(0, -1, 0);
         Vector up = new Vector(0, 5, 6.125);
-        camera = new Camera(eye, center, up, width, height, fovy);
+        camera = new Camera(eye, center, up, new ScreenDimensions(width, height), fovy);
         this.eye = eye;
     }
 

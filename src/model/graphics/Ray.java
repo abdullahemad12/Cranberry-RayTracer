@@ -6,8 +6,8 @@ import model.math.Vector;
 
 public class Ray {
 
-    private static double t_min;
-    private static double t_max;
+    private static double t_min = 0;
+    private static double t_max = 100;
     public static void setTMin(double t_min){
         Ray.t_min = t_min;
     }
@@ -20,8 +20,6 @@ public class Ray {
     public Ray(Point pos, Vector dir){
         this.pos = pos;
         this.dir = dir;
-        t_min = 0;
-        t_max = 100;
     }
 
     public Point ray(double t) throws PointOutOfRangeException{

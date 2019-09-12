@@ -1,6 +1,7 @@
 import controllers.scene.Film;
 import exceptions.IncompleteImageException;
 import exceptions.InvalidSampleException;
+import model.graphics.ScreenDimensions;
 import model.graphics.object.Color;
 import model.graphics.Sample;
 import org.junit.Assert;
@@ -18,7 +19,7 @@ public class FilmTest {
 
     @Before
     public void setUp() {
-        film = new Film(width, height);
+        film = new Film(new ScreenDimensions(width, height));
     }
 
     @Test

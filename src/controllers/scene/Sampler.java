@@ -1,6 +1,7 @@
 package controllers.scene;
 import exceptions.InvalidSampleException;
 import model.graphics.Sample;
+import model.graphics.ScreenDimensions;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
@@ -8,7 +9,9 @@ import java.util.Iterator;
 public class Sampler implements Iterable<Sample>{
     private Sample[][] screen;
 
-    public Sampler(int width, int height) throws InvalidSampleException {
+    public Sampler(ScreenDimensions dims) throws InvalidSampleException {
+        int width = dims.getWidth();
+        int height = dims.getHeight();
         screen = new Sample[height][width];
 
         for(int i = 0; i < height; i++){

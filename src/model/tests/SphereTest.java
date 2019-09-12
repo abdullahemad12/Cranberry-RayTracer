@@ -3,6 +3,7 @@ import exceptions.InvalidSampleException;
 import exceptions.PointOutOfRangeException;
 import model.graphics.LocalGeo;
 import model.graphics.Ray;
+import model.graphics.ScreenDimensions;
 import model.graphics.object.Sphere;
 import model.math.Normal;
 import model.math.Point;
@@ -31,7 +32,7 @@ public class SphereTest {
 
         sphere = new Sphere(center, 2.2, null);
 
-        camera = new Camera(eye,  center,  up,  width,  height,  fovy);
+        camera = new Camera(eye,  center,  up,  new ScreenDimensions(width,  height),  fovy);
 
         this.eye = eye;
         this.center = center;

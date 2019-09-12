@@ -1,6 +1,7 @@
 package controllers.scene;
 
 import model.graphics.Ray;
+import model.graphics.ScreenDimensions;
 import model.math.Point;
 import model.math.Vector;
 import model.graphics.Sample;
@@ -10,8 +11,7 @@ import model.graphics.Sample;
  * Class camera is reponsible for generating rays for the given corresponding pixel
  */
 public class Camera {
-    private int width;
-    private int height;
+    private ScreenDimensions screenDimensions;
     private Point eye;
     private Vector w;
     private Vector u;
@@ -25,11 +25,10 @@ public class Camera {
      * @param eye the location of the eye (look-from) as a 3D point
      * @param center the location of the eye (look-at) as a 3D point
      * @param up the up vector
-     * @param width the width of the screen
-     * @param height the height of the screen
+     * @param screenDimensions the dimensions of the screen
      * @param fovy the field of view in the y direction
      */
-    public Camera(Point eye, Point center, Vector up, int width, int height, double fovy) {
+    public Camera(Point eye, Point center, Vector up, ScreenDimensions screenDimensions, double fovy) {
         Vector a = eye.subtract(center);
         Vector w = a.normalize();
         Vector u = up.cross(w).normalize();
@@ -37,11 +36,11 @@ public class Camera {
         this.w = w;
         this.u = u;
         this.v = v;
-        this.width = width;
-        this.height = height;
+
+        this.screenDimensions = screenDimensions;
         this.eye = eye;
 
-        double aspect_ratio = width / height;
+        double aspect_ratio = screenDimensions.getWidth() / screenDimensions.getHeight();
         double fovy_rads = Math.toRadians(fovy);
         double fovy_rads_tan = Math.tan(fovy_rads / 2);
         double fovx_rads = 2 * Math.atan(aspect_ratio * fovy_rads_tan);
@@ -57,8 +56,12 @@ public class Camera {
      */
     public Ray generateRay(Sample sample) throws IndexOutOfBoundsException{
 
+
         int j = sample.getX();
         int i = sample.getY();
+
+        int width = screenDimensions.getWidth();
+        int height = screenDimensions.getHeight();
 
         if(j >= width || i >= height) {
             throw new IndexOutOfBoundsException();

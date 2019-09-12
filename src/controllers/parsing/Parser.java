@@ -2,6 +2,7 @@ package controllers.parsing;
 
 import exceptions.InvalidStateException;
 import exceptions.UnkownFileExtensionException;
+import model.graphics.ScreenDimensions;
 import model.graphics.light.Attenuation;
 import model.graphics.light.DirectionalLight;
 import model.graphics.light.Light;
@@ -26,10 +27,9 @@ import java.util.Stack;
  */
 public class Parser {
 
-    private int width;
-    private int height;
+    private ScreenDimensions screenDimensions;
     private int maxdepth = 5;
-    private String outputfilename = "out.png";
+    private String outputfilename = null;
     private double[] cameraParameters;
     private List<Shape> shapes;
     private int maxverts = 0;
@@ -48,12 +48,9 @@ public class Parser {
     private Color ks;
     private Color ke;
 
-    public int getWidth() {
-        return width;
-    }
 
-    public int getHeight() {
-        return height;
+    public ScreenDimensions getScreenDimensions() {
+        return screenDimensions;
     }
 
     public int getMaxdepth() {
@@ -87,7 +84,7 @@ public class Parser {
 
     private void initialize(){
         maxdepth = 5;
-        outputfilename = "out.png";
+        outputfilename = null;
         maxverts = 0;
         vertices = null;
         verticesCount = 0;
@@ -164,8 +161,9 @@ public class Parser {
         if(command.length != 3) {
             throw new InvalidStateException("\"size\" command expects two parameters but was given: " + (command.length - 1));
         }
-        width = Integer.parseInt(command[1]);
-        height = Integer.parseInt(command[2]);
+        int width = Integer.parseInt(command[1]);
+        int height = Integer.parseInt(command[2]);
+        screenDimensions = new ScreenDimensions(width, height);
     }
 
     private void parseMaxDepth(String[] command) throws InvalidStateException {

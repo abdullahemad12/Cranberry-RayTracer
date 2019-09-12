@@ -1,5 +1,6 @@
 import controllers.parsing.Parser;
 import exceptions.UnkownFileExtensionException;
+import model.graphics.ScreenDimensions;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,9 +43,9 @@ public class ParserTest {
             e.printStackTrace();
             Assert.fail("should not throw an Exception");
         }
-
-        Assert.assertEquals(640, parser.getWidth());
-        Assert.assertEquals(480, parser.getHeight());
+        ScreenDimensions sd = parser.getScreenDimensions();
+        Assert.assertEquals(640, sd.getWidth());
+        Assert.assertEquals(480, sd.getHeight());
 
         double[] camera = parser.getCameraParameters();
         double[] expectedCamera = new double[]{0, -4, 4, 0, -1, 0, 0, 1, 1, 45};
@@ -105,8 +106,9 @@ public class ParserTest {
             Assert.fail("Should not throw an Exception");
         }
 
-        Assert.assertEquals(1024, parser.getWidth());
-        Assert.assertEquals(512, parser.getHeight());
+        ScreenDimensions sd = parser.getScreenDimensions();
+        Assert.assertEquals(1024, sd.getWidth());
+        Assert.assertEquals(512, sd.getHeight());
 
         Assert.assertEquals(10, parser.getMaxdepth());
 
