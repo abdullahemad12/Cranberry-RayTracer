@@ -1,5 +1,7 @@
 package controllers.scene;
 
+import exceptions.PointOutOfRangeException;
+import model.graphics.Intersection;
 import model.graphics.Ray;
 import model.graphics.light.Light;
 import model.graphics.object.AggregateShape;
@@ -23,6 +25,25 @@ public class RayTracer {
     }
 
     private Color trace(Ray ray, int depth) {
-        return null;
+
+        // no Intersection with any object, return a black color
+        if(!aggregateShape.doesIntersect(ray)) {
+            return new Color(0, 0, 0);
+        }
+        Intersection intersection = null;
+        try{
+            intersection = aggregateShape.intersect(ray);
+        } catch (PointOutOfRangeException e) {
+            // at this point there must be an implementation error
+            // thus print stack trace and terminate the program
+
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        assert(intersection != null);
+
+        // for now return the ambient color of the intersected shape
+        return intersection.getShape().getBRDF().getAmbient();
     }
 }
