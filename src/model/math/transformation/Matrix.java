@@ -157,6 +157,10 @@ public class Matrix {
     public Vector transform(Vector vec){
         return this.multiply(vec);
     }
+    public Point transform(Point point){
+        return this.multiply(point);
+    }
+
 
     public Normal transform(Normal norm){
         Vector v = this.invert().transpose().multiply(norm);

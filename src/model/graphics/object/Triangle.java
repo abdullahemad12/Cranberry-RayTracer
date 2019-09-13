@@ -93,17 +93,9 @@ public class Triangle implements Shape{
 
     @Override
     public void transform(Matrix matrix) {
-        Vector newA = A.subtract(new Point(0, 0, 0));
-        Vector newB = B.subtract(new Point(0, 0, 0));
-        Vector newC = C.subtract(new Point(0,0, 0));
-
-        newA = matrix.transform(newA);
-        newB = matrix.transform(newB);
-        newC = matrix.transform(newC);
-
-        A = new Point(newA.getX(), newA.getY(), newA.getZ());
-        B = new Point(newB.getX(), newB.getY(), newB.getZ());
-        C = new Point(newC.getX(), newC.getY(), newC.getZ());
+        A = matrix.transform(A);
+        B = matrix.transform(B);
+        C = matrix.transform(C);
     }
 
     @Override

@@ -35,6 +35,7 @@ public class Sphere implements Shape {
 
         //transform the ray
         Matrix invTranform = this.transformMatrix.invert();
+        Ray originalRay = ray;
         ray = ray.transform(invTranform);
 
         Point p0 = ray.getPos();
@@ -72,17 +73,18 @@ public class Sphere implements Shape {
             t = Double.min(x1, x2);
         }
 
-        System.out.println("Intersection");
         // Transform the Pos, it's normal and the ray by the transformMatrix
         Point pos = ray.ray(t);
         Normal normal = pos.subtract(center).normalize();
 
 
-        Vector posv = pos.subtract(new Point(0, 0, 0));
-        posv = this.transformMatrix.transform(posv);
-        pos = new Point(posv.getX(), posv.getY(), posv.getZ());
+
+        pos = this.transformMatrix.multiply(pos);
 
         normal = this.transformMatrix.transform(normal);
+
+
+        t = originalRay.calculateT(pos);
 
 
         return new LocalGeo(t, pos, normal);

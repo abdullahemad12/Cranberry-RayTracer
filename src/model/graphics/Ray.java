@@ -31,14 +31,20 @@ public class Ray {
         return this.pos.add(this.dir.multiply(t));
     }
 
+    public double calculateT(Point p){
+
+        Vector dist = p.subtract(pos);
+
+        return dist.magnitude();
+    }
+
     public Point getPos() { return pos;}
     public Vector getDir() { return dir; }
 
     public Ray transform(Matrix matrix) {
-        Vector posv = this.pos.subtract(new Point(0, 0, 0));
-        posv = matrix.multiply(posv);
-        Vector dir = matrix.multiply(this.dir);
-        Point pos = new Point(posv.getX(), posv.getY(), posv.getZ());
+
+        Point pos = matrix.multiply(this.pos);
+        Vector dir = matrix.multiply(this.dir).normalize();
         return new Ray(pos, dir);
     }
 }
