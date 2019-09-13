@@ -6,6 +6,7 @@ import model.graphics.Ray;
 import model.math.Normal;
 import model.math.Point;
 import model.math.Vector;
+import model.math.transformation.Identity;
 import model.math.transformation.Matrix;
 
 /**
@@ -19,16 +20,23 @@ public class Sphere implements Shape {
     private BRDF brdf;
     private Point center;
     private double radius;
+    private Matrix transformMatrix;
 
     public Sphere(Point center, double radius, BRDF brdf) {
         this.center = center;
         this.radius = radius;
         this.brdf = brdf;
+        this.transformMatrix = new Identity();
     }
 
 
     @Override
     public LocalGeo intersect(Ray ray) throws PointOutOfRangeException {
+
+        //transform the ray
+        Matrix invTranform = this.transformMatrix.invert();
+        ray = ray.transform(invTranform);
+
         Point p0 = ray.getPos();
         Vector p1 = ray.getDir();
 
@@ -63,8 +71,19 @@ public class Sphere implements Shape {
         else {
             t = Double.min(x1, x2);
         }
+
+        System.out.println("Intersection");
+        // Transform the Pos, it's normal and the ray by the transformMatrix
         Point pos = ray.ray(t);
         Normal normal = pos.subtract(center).normalize();
+
+
+        Vector posv = pos.subtract(new Point(0, 0, 0));
+        posv = this.transformMatrix.transform(posv);
+        pos = new Point(posv.getX(), posv.getY(), posv.getZ());
+
+        normal = this.transformMatrix.transform(normal);
+
 
         return new LocalGeo(t, pos, normal);
     }
@@ -83,9 +102,7 @@ public class Sphere implements Shape {
 
     @Override
     public void transform(Matrix matrix) {
-        Vector newCenter = center.subtract(new Point(0, 0, 0));
-        newCenter = matrix.transform(newCenter);
-        center = new Point(newCenter.getX(), newCenter.getY(), newCenter.getZ());
+        this.transformMatrix = matrix.multiply(this.transformMatrix);
     }
 
     @Override

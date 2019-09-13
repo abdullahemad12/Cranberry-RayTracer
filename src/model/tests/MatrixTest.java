@@ -1,3 +1,4 @@
+import model.math.Point;
 import model.math.Vector;
 import model.math.transformation.Matrix;
 import model.math.transformation.Rotation;
@@ -46,6 +47,7 @@ public class MatrixTest extends Matrix{
     private Matrix scale;
     private Matrix inverse;
     private Vector vec;
+    private Point point;
 
     @Before
     public void setUp(){
@@ -54,7 +56,7 @@ public class MatrixTest extends Matrix{
         rotate = new Rotation(1, 0, 0, 45);
         scale = new Scale(2, 1, 3.3);
         vec = new Vector(5, 12.5, 22.2);
-
+        point = new Point(5, 12.5, 22.2);
 
     }
 
@@ -103,11 +105,24 @@ public class MatrixTest extends Matrix{
 
         Vector res = comp.multiply(vec);
 
+
+        Assert.assertEquals(res.getX(), 10.0, 0);
+        Assert.assertEquals(res.getY(), -6.858935777509508, 0.00001);
+        Assert.assertEquals(res.getZ(), 80.97079751367156, 0.00001);
+
+    }
+
+    @Test
+    public void multiplyTest3(){
+
+        Matrix comp = scale.multiply(rotate).multiply(translate);
+
+        Point res = comp.multiply(point);
+
+
         Assert.assertEquals(res.getX(), 35.0, 0);
         Assert.assertEquals(res.getY(), 27.47109844962, 0.00001);
         Assert.assertEquals(res.getZ(), 40.25205351981, 0.00001);
-
-
     }
 
     @Test

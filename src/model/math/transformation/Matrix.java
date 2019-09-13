@@ -1,6 +1,7 @@
 package model.math.transformation;
 
 import model.math.Normal;
+import model.math.Point;
 import model.math.Vector;
 
 public class Matrix {
@@ -12,7 +13,7 @@ public class Matrix {
     }
     public Matrix(Matrix m){ mat = m.mat; }
 
-    public Matrix add(Matrix mat){
+    protected Matrix add(Matrix mat){
         double[][] res = new double[4][4];
 
         for(int i = 0; i < res.length - 1; i++){
@@ -52,19 +53,36 @@ public class Matrix {
     }
 
     public Vector multiply(Vector vec) {
-        double[] vector = new double[]{vec.getX(), vec.getY(), vec.getZ(), 1};
+        double[] vector = new double[]{vec.getX(), vec.getY(), vec.getZ(), 0};
+        double[] res = multiply(vector);
+        return new Vector(res[0], res[1], res[2]);
+    }
+
+    public Point multiply(Point p) {
+        double[] point = new double[]{p.getX(), p.getY(), p.getZ(), 1};
+
+        double[] res = multiply(point);
+
+        for(int i = 0; i < res.length; i++) {
+            res[i] = res[i] / res[res.length - 1];
+        }
+
+        return new Point(res[0], res[1], res[2]);
+    }
+
+    private double[] multiply(double[] arr){
         double[] res = new double[4];
         for(int i = 0; i < mat.length; i++){
             double sum = 0;
             for(int j = 0; j < mat[i].length; j++){
-                sum += (vector[j] * mat[i][j]);
+                sum += (arr[j] * mat[i][j]);
             }
             res[i] = sum;
         }
-        return new Vector(res[0], res[1], res[2]);
+        return res;
     }
 
-    public Matrix transpose(){
+    protected Matrix transpose(){
         double[][] res = new double[4][4];
 
         for(int i = 0; i < res.length; i++){
@@ -77,15 +95,15 @@ public class Matrix {
 
     public Matrix invert(){
 
-        double[][] matrix = new double[3][6];
+        double[][] matrix = new double[4][8];
         for(int i = 0; i < matrix.length; i++){
-            System.arraycopy(this.mat[i], 0, matrix[i], 0, 3);
+            System.arraycopy(this.mat[i], 0, matrix[i], 0, 4);
         }
 
-        matrix[0][3] = 1;
-        matrix[1][4] = 1;
-        matrix[2][5] = 1;
-
+        matrix[0][4] = 1;
+        matrix[1][5] = 1;
+        matrix[2][6] = 1;
+        matrix[3][7] = 1;
 
 
         for(int i = 0; i < matrix.length; i++){
@@ -109,10 +127,9 @@ public class Matrix {
         double[][] tmp = matrix;
         matrix = new double[4][4];
         for(int i = 0; i < tmp.length; i++){
-            if (tmp[i].length - 3 >= 0) System.arraycopy(tmp[i], 3, matrix[i], 0, tmp[i].length - 3);
+            if (tmp[i].length - 3 >= 0) System.arraycopy(tmp[i], 4, matrix[i], 0, tmp[i].length - 4);
         }
 
-        matrix[3][3] = 1;
         return new Matrix(matrix);
     }
 

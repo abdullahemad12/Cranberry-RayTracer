@@ -4,11 +4,13 @@ public class Point {
     private double x;
     private double y;
     private double z;
+    private double w;
 
     public Point(double x, double y, double z){
         this.x = x;
         this.y = y;
         this.z = z;
+        this.w = 1;
     }
 
     public double getX(){
@@ -33,9 +35,9 @@ public class Point {
     @Override
     public boolean equals(Object obj) {
 
-        return super.equals(obj) || obj instanceof Point ? (Math.abs(((Point)obj).getX() - this.x) <= 10e-3 &&
-         Math.abs(((Point)obj).getY() - this.y) <= 10e-3
-               && Math.abs(((Point)obj).getZ() - this.z) <= 10e-7) : false;
+        return (super.equals(obj) || obj instanceof Point) && (Math.abs(((Point) obj).getX() - this.x) <= 10e-3 &&
+                Math.abs(((Point) obj).getY() - this.y) <= 10e-3
+                && Math.abs(((Point) obj).getZ() - this.z) <= 10e-7);
     }
 
 }

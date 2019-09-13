@@ -3,6 +3,7 @@ package model.graphics;
 import exceptions.PointOutOfRangeException;
 import model.math.Point;
 import model.math.Vector;
+import model.math.transformation.Matrix;
 
 public class Ray {
 
@@ -32,4 +33,12 @@ public class Ray {
 
     public Point getPos() { return pos;}
     public Vector getDir() { return dir; }
+
+    public Ray transform(Matrix matrix) {
+        Vector posv = this.pos.subtract(new Point(0, 0, 0));
+        posv = matrix.multiply(posv);
+        Vector dir = matrix.multiply(this.dir);
+        Point pos = new Point(posv.getX(), posv.getY(), posv.getZ());
+        return new Ray(pos, dir);
+    }
 }
