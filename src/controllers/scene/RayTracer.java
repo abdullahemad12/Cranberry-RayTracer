@@ -70,6 +70,23 @@ public class RayTracer {
             System.exit(4);
         }
         for(Light light : lights) {
+
+            // shadowing: cast a ray to the light and check if hits an object in the
+            // way, if it does skip this light
+            Ray lightRay = light.generateLightRay(intersection);
+            if(aggregateShape.doesIntersect(lightRay)) {
+                try{
+                    Intersection lightIntersection = aggregateShape.intersect(lightRay);
+                    if(lightIntersection.getLocalGeo().getThit() < light.getDistanceFromLight(intersection)){
+                        continue;
+                    }
+                } catch (PointOutOfRangeException e) {
+                    e.printStackTrace();
+                    System.exit(3);
+                }
+            }
+
+
             try {
                 color = color.add(light.computeLight(intersection, eyeDir));
             } catch(ColorOverflowException e) {
