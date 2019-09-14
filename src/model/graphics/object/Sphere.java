@@ -81,7 +81,7 @@ public class Sphere implements Shape {
 
         pos = this.transformMatrix.transform(pos);
 
-        normal = this.transformMatrix.transform(normal);
+        normal = this.transformMatrix.transform(normal).normalize();
 
 
         t = originalRay.calculateT(pos);

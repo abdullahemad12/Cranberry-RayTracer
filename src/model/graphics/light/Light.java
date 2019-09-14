@@ -21,6 +21,7 @@ abstract public class Light {
         this.attenuation = attenuation;
     }
 
+    abstract public double getDistanceFromLight(Intersection intersection);
     abstract public Ray generateLightRay(Intersection intersection);
     abstract public Color computeLight(Intersection intersection, Vector eyeDir) throws ColorOverflowException;
 

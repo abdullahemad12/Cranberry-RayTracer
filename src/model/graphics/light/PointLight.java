@@ -20,14 +20,26 @@ public class PointLight extends Light {
     }
 
     @Override
+    public double getDistanceFromLight(Intersection intersection) {
+        Vector dir = this.position.subtract(intersection.getLocalGeo().getPos());
+        return dir.magnitude();
+    }
+
+    @Override
     public Ray generateLightRay(Intersection intersection) {
-        return null;
+
+        Vector dir = this.position.subtract(intersection.getLocalGeo().getPos());
+        dir = dir.normalize();
+        Point pos = (Point) intersection.getLocalGeo().getPos().add(0.0001);
+
+        return new Ray(pos, dir);
     }
 
     @Override
     public Color computeLight(Intersection intersection, Vector eyeDir) throws ColorOverflowException {
         LocalGeo lg = intersection.getLocalGeo();
         Normal normal = lg.getNormal();
+        assert(Math.abs(normal.magnitude() - 1) < 0.0000001);
         Point myPos = lg.getPos();
         BRDF brdf = intersection.getShape().getBRDF();
 

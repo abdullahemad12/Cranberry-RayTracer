@@ -7,6 +7,7 @@ import model.graphics.Ray;
 import model.graphics.object.BRDF;
 import model.graphics.object.Color;
 import model.math.Normal;
+import model.math.Point;
 import model.math.Vector;
 
 public class DirectionalLight extends Light {
@@ -17,8 +18,16 @@ public class DirectionalLight extends Light {
     }
 
     @Override
+    public double getDistanceFromLight(Intersection intersection) {
+         // infinity
+        return Double.MAX_VALUE;
+    }
+
+    @Override
     public Ray generateLightRay(Intersection intersection) {
-        return null;
+        Vector dir = v.normalize();
+        Point p = (Point) intersection.getLocalGeo().getPos().add(0.0001);
+        return new Ray(p, dir);
     }
 
     @Override
@@ -26,6 +35,7 @@ public class DirectionalLight extends Light {
         LocalGeo lg = intersection.getLocalGeo();
         BRDF brdf = intersection.getShape().getBRDF();
         Normal normal = lg.getNormal();
+        assert(Math.abs(normal.magnitude() - 1) < 0.0000001);
 
         Vector direction = v.normalize();
         Vector halfVec = direction.add(eyeDir).normalize();
