@@ -103,7 +103,7 @@ public class MatrixTest extends Matrix{
     public void multiplyTest2() {
         Matrix comp = scale.multiply(rotate).multiply(translate);
 
-        Vector res = comp.multiply(vec);
+        Vector res = comp.transform(vec);
 
 
         Assert.assertEquals(res.getX(), 10.0, 0);
@@ -117,7 +117,7 @@ public class MatrixTest extends Matrix{
 
         Matrix comp = scale.multiply(rotate).multiply(translate);
 
-        Point res = comp.multiply(point);
+        Point res = comp.transform(point);
 
 
         Assert.assertEquals(res.getX(), 35.0, 0);

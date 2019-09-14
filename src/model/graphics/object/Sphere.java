@@ -79,7 +79,7 @@ public class Sphere implements Shape {
 
 
 
-        pos = this.transformMatrix.multiply(pos);
+        pos = this.transformMatrix.transform(pos);
 
         normal = this.transformMatrix.transform(normal);
 

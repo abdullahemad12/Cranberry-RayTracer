@@ -43,8 +43,8 @@ public class Ray {
 
     public Ray transform(Matrix matrix) {
 
-        Point pos = matrix.multiply(this.pos);
-        Vector dir = matrix.multiply(this.dir).normalize();
+        Point pos =  matrix.transform(this.pos);
+        Vector dir = matrix.transform(this.dir).normalize();
         return new Ray(pos, dir);
     }
 }

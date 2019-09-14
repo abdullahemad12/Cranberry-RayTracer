@@ -1,29 +1,13 @@
 package model.math;
 
-public class Vector {
-    private double x;
-    private double y;
-    private double z;
+public class Vector extends MultiDimComponent{
+
 
     public Vector(double x, double y, double z){
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        super(x, y, z, 0);
     }
 
-    public double getX(){
-        return x;
-    }
-    public double getY(){
-        return y;
-    }
-    public double getZ(){
-        return z;
-    }
 
-    public double dot(Vector vec){
-        return x * vec.getX() + y * vec.getY() + z * vec.getZ();
-    }
 
     public Vector cross(Vector vec){
 
@@ -33,12 +17,48 @@ public class Vector {
         return new Vector(i, j, k);
     }
 
-    public Vector add(Vector vec) {
-        return new Vector(x + vec.getX(), y + vec.getY(), z + vec.getZ());
+    public MultiDimComponent add(MultiDimComponent mdc) {
+        double x = this.x + mdc.x;
+        double y = this.y + mdc.y;
+        double z = this.z + mdc.z;
+        double w = this.w + mdc.w;
+
+        if(w == 0) {
+            return new Vector(x, y, z);
+        }
+        else{
+            return new Point(x / w, y / w, z / w);
+        }
+
+    }
+    public Vector add(Vector vector) {
+        return new Vector(x + vector.getX(), y + vector.getY(), z + vector.getZ());
     }
 
-    public Vector subtract(Vector vec){
-        return new Vector(x - vec.getX(), y - vec.getY(), z - vec.getZ());
+    public Point add(Point point) {
+        return new Point(x + point.getX(), y + point.getY(), z + point.getZ());
+    }
+
+    public MultiDimComponent subtract(MultiDimComponent mdc) {
+        double x = this.x - mdc.x;
+        double y = this.y - mdc.y;
+        double z = this.z - mdc.z;
+        double w = this.w - mdc.w;
+
+        if(w == 0) {
+            return new Vector(x, y, z);
+        }
+        else{
+            return new Point(x / w, y / w, z / w);
+        }
+    }
+
+    public Vector subtract(Vector vector) {
+        return new Vector(x - vector.getX(), y - vector.getY(), z - vector.getZ());
+    }
+
+    public Point subtract(Point point) {
+        return new Point(point.getX() - x, point.getY() - y, point.getZ() - z);
     }
 
     public Vector multiply(double scalar){
@@ -60,8 +80,8 @@ public class Vector {
     @Override
     public boolean equals(Object obj) {
 
-        return super.equals(obj) || obj instanceof Vector ? (Math.abs(((Vector)obj).getX() - this.x) <= 10e-3 &&
-                Math.abs(((Vector)obj).getY() - this.y) <= 10e-3
-                && Math.abs(((Vector)obj).getZ() - this.z) <= 10e-7) : false;
+        return (super.equals(obj) || obj instanceof Vector) && (Math.abs(((Vector) obj).getX() - this.x) <= 10e-3 &&
+                Math.abs(((Vector) obj).getY() - this.y) <= 10e-3
+                && Math.abs(((Vector) obj).getZ() - this.z) <= 10e-7);
     }
 }

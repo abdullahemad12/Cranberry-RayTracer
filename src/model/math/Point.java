@@ -1,34 +1,66 @@
 package model.math;
 
-public class Point {
-    private double x;
-    private double y;
-    private double z;
+public class Point extends MultiDimComponent{
 
     public Point(double x, double y, double z){
-        this.x = x;
-        this.y = y;
-        this.z = z;
+       super(x, y, z ,1);
     }
 
-    public double getX(){
-        return x;
+    /**
+     * Subtracts a multidimensional component from this Point
+     * @param mdc the multidimensional component to be subtracted
+     * @return the result of the subtraction
+     */
+    public MultiDimComponent subtract(MultiDimComponent mdc) {
+        double x = this.x - mdc.x;
+        double y = this.y - mdc.y;
+        double z = this.z - mdc.z;
+        double w = this.w - mdc.w;
+
+        if(w == 0) {
+            return new Vector(x, y, z);
+        }
+        else{
+            return new Point(x / w, y / w, z / w);
+        }
     }
-    public double getY(){
-        return y;
+
+    public Point subtract(Vector vector) {
+        return new Point(x - vector.getX(), y - vector.getY(), z - vector.getZ());
     }
-    public double getZ(){
-        return z;
+
+    public Vector subtract(Point point) {
+        return new Vector(x - point.getX(), y - point.getY(), z - point.getZ());
     }
 
 
-    public Vector subtract(Point p){
-        return new Vector(x - p.getX(), y - p.getY(), z - p.getZ());
+    /**
+     * Adds a multidimensional component from this Point
+     * @param mdc the multidimensional component to be added
+     * @return the result of the addition
+     */
+    public MultiDimComponent add(MultiDimComponent mdc){
+        double x = this.x + mdc.x;
+        double y = this.y + mdc.y;
+        double z = this.z + mdc.z;
+        double w = this.w + mdc.w;
+
+        if(w == 0) {
+            return new Vector(x, y, z);
+        }
+        else{
+            return new Point(x / w, y / w, z / w);
+        }
     }
 
-    public Point add(Vector vector){
-        return new Point(this.x + vector.getX(), this.y + vector.getY(), this.z + vector.getZ());
+    public Point add(Vector vector) {
+        return new Point(x + vector.getX(), y + vector.getY(), z + vector.getZ());
     }
+
+    public Point add(Point point) {
+        return new Point((x + point.getX()) / 2, (y + point.getY()) / 2, (z + point.getZ()) / 2);
+    }
+
 
     @Override
     public boolean equals(Object obj) {

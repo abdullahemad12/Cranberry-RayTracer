@@ -14,4 +14,8 @@ public class Light {
         this.c = c;
         this.attenuation = attenuation;
     }
+
+    public Color computePhongComponent(){
+        return null;
+    }
 }

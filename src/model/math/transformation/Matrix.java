@@ -1,5 +1,6 @@
 package model.math.transformation;
 
+import model.math.MultiDimComponent;
 import model.math.Normal;
 import model.math.Point;
 import model.math.Vector;
@@ -52,22 +53,18 @@ public class Matrix {
         return new Matrix(res);
     }
 
-    public Vector multiply(Vector vec) {
-        double[] vector = new double[]{vec.getX(), vec.getY(), vec.getZ(), 0};
+    private MultiDimComponent multiply(MultiDimComponent mdc){
+        double[] vector = new double[]{mdc.getX(), mdc.getY(), mdc.getZ(), mdc.getW()};
         double[] res = multiply(vector);
-        return new Vector(res[0], res[1], res[2]);
-    }
-
-    public Point multiply(Point p) {
-        double[] point = new double[]{p.getX(), p.getY(), p.getZ(), 1};
-
-        double[] res = multiply(point);
-
-        for(int i = 0; i < res.length; i++) {
+        for(int i = 0; i < res.length && res[res.length-1] != 0; i++) {
             res[i] = res[i] / res[res.length - 1];
         }
-
-        return new Point(res[0], res[1], res[2]);
+        if(res[res.length -1] != 0){
+            return new Point(res[0], res[1], res[2]);
+        }
+        else {
+            return new Vector(res[0], res[1], res[2]);
+        }
     }
 
     private double[] multiply(double[] arr){
@@ -155,15 +152,15 @@ public class Matrix {
     }
 
     public Vector transform(Vector vec){
-        return this.multiply(vec);
+        return (Vector) this.multiply(vec);
     }
     public Point transform(Point point){
-        return this.multiply(point);
+        return (Point) this.multiply(point);
     }
 
 
     public Normal transform(Normal norm){
-        Vector v = this.invert().transpose().multiply(norm);
+        Vector v = (Vector) this.invert().transpose().multiply(norm);
         return new Normal(v.getX(), v.getY(), v.getZ());
     }
 
