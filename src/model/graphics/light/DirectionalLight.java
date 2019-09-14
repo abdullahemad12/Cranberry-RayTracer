@@ -1,6 +1,7 @@
 package model.graphics.light;
 
 import exceptions.ColorOverflowException;
+import exceptions.PointOutOfRangeException;
 import model.graphics.Intersection;
 import model.graphics.LocalGeo;
 import model.graphics.Ray;
@@ -11,6 +12,7 @@ import model.math.Point;
 import model.math.Vector;
 
 public class DirectionalLight extends Light {
+    private static final double INFINITY_DISTANCE = 10000;
     private Vector v;
     public DirectionalLight(Vector v, Color c) {
         super(c);
@@ -26,7 +28,15 @@ public class DirectionalLight extends Light {
     @Override
     public Ray generateLightRay(Intersection intersection) {
         Vector dir = v.normalize();
-        Point p = (Point) intersection.getLocalGeo().getPos().add(0.0001);
+        Point p = intersection.getLocalGeo().getPos();
+        Ray tmp = new Ray(p, dir);
+
+        try {
+            p = tmp.ray(0.0001);
+        } catch (PointOutOfRangeException e) {
+            e.printStackTrace();
+            System.exit(3);
+        }
         return new Ray(p, dir);
     }
 
@@ -39,8 +49,8 @@ public class DirectionalLight extends Light {
 
         Vector direction = v.normalize();
         Vector halfVec = direction.add(eyeDir).normalize();
-        Color phong = computePhongComponent(halfVec, normal, brdf, Double.MAX_VALUE);
-        Color lambert = computeLambertComponent(direction, normal, brdf, Double.MAX_VALUE);
+        Color phong = computePhongComponent(halfVec, normal, brdf, INFINITY_DISTANCE);
+        Color lambert = computeLambertComponent(direction, normal, brdf, INFINITY_DISTANCE);
         return phong.add(lambert);
     }
 }

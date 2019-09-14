@@ -73,8 +73,8 @@ public class RayTracer {
 
             // shadowing: cast a ray to the light and check if hits an object in the
             // way, if it does skip this light
-            Ray lightRay = light.generateLightRay(intersection);
-            if(aggregateShape.doesIntersect(lightRay)) {
+          Ray lightRay = light.generateLightRay(intersection);
+           if(aggregateShape.doesIntersect(lightRay)) {
                 try{
                     Intersection lightIntersection = aggregateShape.intersect(lightRay);
                     if(lightIntersection.getLocalGeo().getThit() < light.getDistanceFromLight(intersection)){

@@ -28,7 +28,7 @@ public class Triangle implements Shape{
          * n =     --------------------
          *          |(C - A) x (B - A)|
          */
-        Normal n = C.subtract(A).cross(B.subtract(A)).normalize();
+        Normal n = B.subtract(A).cross(C.subtract(A)).normalize();
 
         Point zeros = new Point(0, 0, 0);
         Point p0 = ray.getPos();

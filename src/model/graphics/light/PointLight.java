@@ -1,6 +1,7 @@
 package model.graphics.light;
 
 import exceptions.ColorOverflowException;
+import exceptions.PointOutOfRangeException;
 import model.graphics.Intersection;
 import model.graphics.LocalGeo;
 import model.graphics.Ray;
@@ -30,7 +31,15 @@ public class PointLight extends Light {
 
         Vector dir = this.position.subtract(intersection.getLocalGeo().getPos());
         dir = dir.normalize();
-        Point pos = (Point) intersection.getLocalGeo().getPos().add(0.0001);
+        Point pos = intersection.getLocalGeo().getPos();
+        Ray tmp = new Ray(pos, dir);
+
+        try{
+            pos = tmp.ray(0.0001);
+        } catch(PointOutOfRangeException e) {
+            e.printStackTrace();
+            System.exit(3);
+        }
 
         return new Ray(pos, dir);
     }
