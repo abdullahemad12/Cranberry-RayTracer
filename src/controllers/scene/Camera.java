@@ -80,4 +80,8 @@ public class Camera {
 
         return new Ray(eye, dir);
     }
+
+    Vector calculateEyeDirection(Point p) {
+        return eye.subtract(p).normalize();
+    }
 }

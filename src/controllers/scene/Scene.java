@@ -1,9 +1,9 @@
 package controllers.scene;
 
 import controllers.parsing.Parser;
-import exceptions.InvalidSampleException;
 import exceptions.InvalidStateException;
 import exceptions.UnkownFileExtensionException;
+import model.graphics.Intersection;
 import model.graphics.Ray;
 import model.graphics.Sample;
 import model.graphics.ScreenDimensions;
@@ -22,7 +22,7 @@ public class Scene {
     private Film film;
     private Parser parser;
 
-    public Scene(String filepath) throws InvalidStateException, IOException, UnkownFileExtensionException, InvalidSampleException {
+    public Scene(String filepath) throws InvalidStateException, IOException, UnkownFileExtensionException {
         parser = new Parser();
         parser.parseFile(filepath);
 
@@ -39,7 +39,16 @@ public class Scene {
     public void render() throws Exception {
         for(Sample sample : sampler) {
             Ray ray = camera.generateRay(sample);
-            Color color = raytracer.trace(ray);
+            Intersection intersection = raytracer.trace(ray);
+            Color color;
+            if(intersection == null) { // no intersection
+                color = new Color(0, 0, 0);
+            }
+            else {
+                Point p = intersection.getLocalGeo().getPos();
+                Vector eyeDir = camera.calculateEyeDirection(p);
+                color = raytracer.performColorShading(intersection, eyeDir);
+            }
             film.commit(sample, color);
         }
         film.writeImage();
