@@ -16,4 +16,10 @@ public class Attenuation {
         this.linear = linear;
         this.quadratic = quadratic;
     }
+
+    public double computeAttenuation(double d) {
+        double dsq = d * d;
+
+        return 1 / (constant + (linear * d) + (quadratic * dsq));
+    }
 }

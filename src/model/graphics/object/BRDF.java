@@ -33,4 +33,8 @@ public class BRDF {
     public Color getReflection(){
         return this.kr;
     }
+
+    public double getShininess() { return this.shininess; }
+
+    public Color getEmission() { return this.ke; }
 }
