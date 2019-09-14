@@ -7,8 +7,6 @@ import org.apache.commons.cli.ParseException;
 
 public class Main {
 
-    private static final String ANSI_RED = "\u001B[31m";
-    private static final String ANSI_RESET = "\u001B[0m";
     public static void main(String[] args){
 
         ArgumentsParser argParser = new ArgumentsParser();
