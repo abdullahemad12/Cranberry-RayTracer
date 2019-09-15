@@ -11,9 +11,10 @@ public class Printer {
     private static final String ANSI_PURPLE = "\u001B[35m";
     private static final String ANSI_CYAN = "\u001B[36m";
     private static final String ANSI_WHITE = "\u001B[37m";
+    private static final String ANSI_CLEAR = "\033[H\033[2J";
 
     public static void clearScreen(){
-        System.out.print("\033[H\033[2J");
+        System.out.print(ANSI_CLEAR);
     }
     public static void printError(String message) {
         System.out.println(ANSI_RED + message + ANSI_RESET);

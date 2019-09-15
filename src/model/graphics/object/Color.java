@@ -112,6 +112,7 @@ public class Color {
      * @param c color to be subtracted
      * @deprecated
      */
+    @Deprecated
     public void subtract(Color c) {
         this.r = (this.r - c.r) % 1.00000001;
         this.g = (this.g - c.g) % 1.00000001;

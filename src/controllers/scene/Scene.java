@@ -1,5 +1,6 @@
 package controllers.scene;
 
+import app.format.Printer;
 import controllers.parsing.Parser;
 import exceptions.InvalidStateException;
 import exceptions.UnknownFileExtensionException;
@@ -59,6 +60,7 @@ public class Scene {
      * @throws Exception when something goes wrong while tracing
      */
     public void render() throws Exception {
+        Printer.println("Rendering Scene....");
         for(Sample sample : sampler) {
             Color color = raytracer.trace(sample);
             film.commit(sample, color);
