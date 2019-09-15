@@ -12,14 +12,28 @@ import model.math.Normal;
 import model.math.Point;
 import model.math.Vector;
 
+/**
+ * The PointLight class represents a point light in the world at location position with color c
+ * @author Abdullah Emad
+ * @version 1.0
+ */
 public class PointLight extends Light {
 
+    /**
+     * the point at which the light is located
+     */
     private Point position;
 
+    /**
+     *
+     * @param position the position at which the light is located
+     * @param c the color intensity of the light
+     */
     public PointLight(Point position, Color c) {
         super(c);
         this.position = position;
     }
+
 
     @Override
     public double getDistanceFromLight(Intersection intersection) {

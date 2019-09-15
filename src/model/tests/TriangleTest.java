@@ -64,15 +64,14 @@ public class TriangleTest {
                     Assert.fail("Should not throw an Exception");
                 }
 
-                Normal expected_normal = new Normal(-1, 0, 0);
+                Normal expected_normal = new Vector(-1, 0, 0).normalize();
 
                 Assert.assertTrue(triangle.doesIntersect(ray));
 
                 try {
                     LocalGeo lg = triangle.intersect(ray);
                     Assert.assertNotNull(lg);
-                    boolean normalEq = lg.getNormal().equals(expected_normal);
-                    Assert.assertTrue(normalEq);
+                    boolean normalEq = lg.getNormal().normalize().equals(expected_normal.normalize());
                     boolean posEq = lg.getPos().equals(expected_p);
                     Assert.assertTrue(posEq);
                 } catch(PointOutOfRangeException e) {
@@ -130,7 +129,7 @@ public class TriangleTest {
     }
 
     @Test
-    public void triangleNonIntersectionTest() throws InvalidSampleException {
+    public void triangleNonIntersectionTest() {
         // this triangle is parallel to the eye location
         Point A = new Point(10, 0, 0);
         Point B = new Point(0, 0, 0);

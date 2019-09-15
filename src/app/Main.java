@@ -6,6 +6,11 @@ import controllers.scene.Scene;
 import exceptions.CranberryException;
 import org.apache.commons.cli.ParseException;
 
+/**
+ * This is the class that contains the main function that runs the program
+ * @author Abdullah Emad
+ * @version 1.0
+ */
 public class Main {
     private static final int SUCCESS = 0;
     public static void main(String[] args){

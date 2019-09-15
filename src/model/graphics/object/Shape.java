@@ -6,11 +6,12 @@ import model.graphics.Ray;
 import model.math.transformation.Matrix;
 
 /**
- * @author Abdullah Emad
  * The Shape interface provides the signature of the neccessary functions that are needed by the ray tracer
  * to draw any shape.
  * The shape Interface should be implemented by any class the represents an object in the
  * world
+ * @author Abdullah Emad
+ * @version 1.0
  */
 public interface Shape {
     /**

@@ -1,5 +1,11 @@
 package model.math;
 
+/**
+ * The class point represents a 3D point in space with its homogeneous coordinate value set to 1
+ * so that translations apply to it
+ * @author Abdullah Emad
+ * @version 1.0
+ */
 public class Point extends MultiDimComponent{
 
     public Point(double x, double y, double z){
@@ -7,7 +13,7 @@ public class Point extends MultiDimComponent{
     }
 
     /**
-     * Subtracts a multidimensional component from this Point
+     * <b>EFFECTS: </b>Subtracts a multidimensional component from this Point
      * @param mdc the multidimensional component to be subtracted
      * @return the result of the subtraction
      */
@@ -25,10 +31,20 @@ public class Point extends MultiDimComponent{
         }
     }
 
+    /**
+     * <b>EFFECTS: </b>Subtracts a vector component from this Point
+     * @param vector the vector to be subtracted
+     * @return the result of the subtraction as a point
+     */
     public Point subtract(Vector vector) {
         return new Point(x - vector.getX(), y - vector.getY(), z - vector.getZ());
     }
 
+    /**
+     * <b>EFFECTS: </b>Subtracts a point component from this Point
+     * @param point the vector to be subtracted
+     * @return the result of the subtraction as a Vector
+     */
     public Vector subtract(Point point) {
         return new Vector(x - point.getX(), y - point.getY(), z - point.getZ());
     }
@@ -53,10 +69,20 @@ public class Point extends MultiDimComponent{
         }
     }
 
+    /**
+     * <b>EFFECTS: </b>Adds a vector component to this Point
+     * @param vector the vector to be added
+     * @return the result of the addition as a Point
+     */
     public Point add(Vector vector) {
         return new Point(x + vector.getX(), y + vector.getY(), z + vector.getZ());
     }
 
+    /**
+     * <b>EFFECTS: </b>Adds a point component to this Point
+     * @param point the vector to be added
+     * @return the result of the addition as a Point
+     */
     public Point add(Point point) {
         return new Point((x + point.getX()) / 2, (y + point.getY()) / 2, (z + point.getZ()) / 2);
     }

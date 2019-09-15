@@ -1,6 +1,19 @@
 package model.math.transformation;
 
+/**
+ * Translation Matrix
+ * @author Abdullah Emad
+ * @version 1.0
+ * @see Matrix
+ */
 public class Translation extends Matrix {
+    /**
+     * Creates a translation matrix with the given translation values that could be used to
+     * translate a multidimensional component
+     * @param x the translation in the x direction
+     * @param y the translation in the y direction
+     * @param z the translation in the z direction
+     */
     public Translation(double x, double y, double z){
         super(initArray(x, y, z));
     }

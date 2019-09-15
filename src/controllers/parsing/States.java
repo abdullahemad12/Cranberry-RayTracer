@@ -1,5 +1,8 @@
 package controllers.parsing;
 
+/**
+ * State Enum
+ */
 public enum States {
 
     START(0) , INTERMEDIATE(1), INTERMEDIATE1(2), INTERMEDIATE2(3), INTERMEDIATE3(4),

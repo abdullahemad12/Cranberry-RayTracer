@@ -2,8 +2,19 @@ package controllers.parsing;
 
 import exceptions.InvalidStateException;
 
+/**
+ * The FiniteStateMachine acts helps the parser check for syntax errors
+ * @author Abdullah Emad
+ * @version 1.0
+ */
 public class FiniteStateMachine {
+    /**
+     * the current state of the finite machine
+     */
     private States currentState;
+    /**
+     * the state transition function
+     */
     private States[][] transitionMatrix;
 
     public FiniteStateMachine() {
@@ -75,6 +86,14 @@ public class FiniteStateMachine {
 
         return null;
     }
+
+    /**
+     * Takes an action given a transition command
+     * @param command the transition command
+     * @param lineNumber the line number at which this transition command was parsed
+     * @return the transition as an ENUM on success
+     * @throws InvalidStateException when the machine end up in the ERROR state
+     */
     public Transitions takeAction(String command, int lineNumber) throws InvalidStateException {
         Transitions transitions = stringToTransitions(command);
         if(transitions == null){

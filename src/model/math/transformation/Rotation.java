@@ -1,7 +1,20 @@
 package model.math.transformation;
 
+/**
+ * Rotation Matrix
+ * @author Abdullah Emad
+ * @version 1.0
+ * @see Matrix
+ */
 public class Rotation extends Matrix{
-
+    /**
+     * Creates a rotation matrix with the given translation values that could be used to
+     * rotate a multidimensional component about a given vector
+     * @param x the x value of the vector
+     * @param y the y value of the vector
+     * @param z the z value of the vector
+     * @param deg the value of rotation in degrees
+     */
     public Rotation(double x, double y, double z, double deg){
         super(initArray(x, y, z, deg));
     }

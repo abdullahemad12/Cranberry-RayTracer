@@ -8,19 +8,50 @@ import model.math.Point;
 import model.math.Vector;
 import model.math.transformation.Matrix;
 
+/**
+ * The Triangle class represents a triangle in the world. The triangle is characterised by
+ * three different point at which a connection will be drawn.
+ *
+ * <\br> <b>IMPORTANT: <b/> the three points A, B, C must be defined in counter clockwise direction
+ * following the right hand rule in order for tracing and shading to work correctly
+ *
+ * @author Abdullah Emad
+ * @version 1.0
+ */
 public class Triangle implements Shape{
 
+    /**
+     * First point of the triangle
+     */
     private Point A;
+    /**
+     * Second point of the triangle
+     */
     private Point B;
+    /**
+     * third point of the triangle
+     */
     private Point C;
+
+    /**
+     * The Material color of the triangle
+     */
     private BRDF brdf;
 
+    /**
+     *
+     * @param A first Point A
+     * @param B second Point B
+     * @param C third Point C
+     * @param brdf the brdf material
+     */
     public Triangle(Point A, Point B, Point C, BRDF brdf) {
         this.A = A;
         this.B = B;
         this.C = C;
         this.brdf = brdf;
     }
+
 
     @Override
     public LocalGeo intersect(Ray ray) throws PointOutOfRangeException {

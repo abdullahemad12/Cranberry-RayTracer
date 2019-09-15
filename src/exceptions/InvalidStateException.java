@@ -3,9 +3,19 @@ package exceptions;
 import controllers.parsing.States;
 import controllers.parsing.Transitions;
 
+/**
+ * InvalidStateException is thrown from the parser when the input file contains error
+ */
 public class InvalidStateException extends CranberryException{
 
     private String message;
+
+    /**
+     *
+     * @param oldState the old state of the Finite state machine
+     * @param transition the transition action that produced this action
+     * @param lineNumber the line number which took this action
+     */
     public InvalidStateException(States oldState, Transitions transition, int lineNumber){
         super("Invalid File Syntax!", 4);
 

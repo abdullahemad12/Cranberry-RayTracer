@@ -7,7 +7,15 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 
+/**
+ * Sampler class is an Iterable class that gives you one screen sample at a time
+ * @author Abdullah Emad
+ * @version 1.0
+ */
 public class Sampler implements Iterable<Sample>{
+    /**
+     * the dimension of the screen
+     */
     private ScreenDimensions screenDimensions;
 
     public Sampler(ScreenDimensions dims) {

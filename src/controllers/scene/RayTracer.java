@@ -18,6 +18,12 @@ import model.math.Vector;
 
 import java.util.List;
 
+/**
+ * The ray tracer class is the class where the highlevel work of ray tracing is done. The class is responsible for
+ * producing a ray for every given sample and returning a color for that sample to be committed in the film.
+ * @author Abdullah Emad
+ * @version 1.0
+ */
 public class RayTracer {
 
     public static final double ERROR_EPSILON = 0.0001;
@@ -25,6 +31,9 @@ public class RayTracer {
     private AggregateShape aggregateShape;
     private List<Light> lights;
     private int maxDepth = 5;
+    /**
+     * The camera of the world
+     */
     private Camera camera;
 
     public RayTracer(Camera camera) {
@@ -51,6 +60,11 @@ public class RayTracer {
         this.lights.add(light);
     }
 
+    /**
+     * Generates a color for a given sample
+     * @param sample the sample of interest
+     * @return the generated color
+     */
     Color trace(Sample sample) {
         Ray ray = camera.generateRay(sample);
         return trace(ray, maxDepth);
@@ -150,6 +164,12 @@ public class RayTracer {
         return color;
     }
 
+    /**
+     * Computes a reflected ray for reflection computations
+     * @param originalRay the original ray to be reflected
+     * @param lg the point at which the reflection should start
+     * @return the reflected ray
+     */
     private Ray computeReflectionRay(Ray originalRay, LocalGeo lg) {
         Vector direction = originalRay.getDir();
         Normal normal = lg.getNormal();

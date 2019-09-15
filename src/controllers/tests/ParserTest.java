@@ -1,5 +1,5 @@
 import controllers.parsing.Parser;
-import exceptions.UnkownFileExtensionException;
+import exceptions.UnknownFileExtensionException;
 import model.graphics.ScreenDimensions;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,7 +19,7 @@ public class ParserTest {
         try {
             parser.parseFile("/home/abdullah/Dropbox/OSS/Computer Graphics/Homework3/scene3");
             Assert.fail("Should throw an Exception!");
-        } catch(UnkownFileExtensionException e) {
+        } catch(UnknownFileExtensionException e) {
             Assert.assertTrue(true);
         } catch (Exception e){
             Assert.fail("should throw an UnknownFileExtension Exception instead");

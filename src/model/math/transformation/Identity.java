@@ -1,7 +1,16 @@
 package model.math.transformation;
 
+/**
+ * The Identity Matrix
+ * @author Abdullah Emad
+ * @version 1.0
+ * @see Matrix
+ */
 public class Identity extends Matrix {
 
+    /**
+     * Creates the identity Matrix
+     */
     public Identity() {
         super(initArray());
     }

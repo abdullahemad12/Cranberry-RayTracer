@@ -8,6 +8,7 @@ import model.graphics.Sample;
 
 /**
  * @author Abdullah Emad
+ * @version 1.0
  * Class camera is reponsible for generating rays for the given corresponding pixel
  */
 public class Camera {

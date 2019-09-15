@@ -17,11 +17,26 @@ import model.math.transformation.Matrix;
  */
 public class Sphere implements Shape {
 
+    /**
+     * the lighting material of the sphere
+     */
     private BRDF brdf;
+    /**
+     * the center location of the sphere
+     */
     private Point center;
+    /**
+     * the radius of the sphere
+     */
     private double radius;
     private Matrix transformMatrix;
 
+    /**
+     *
+     * @param center the center
+     * @param radius the radius
+     * @param brdf the brdf colors
+     */
     public Sphere(Point center, double radius, BRDF brdf) {
         this.center = center;
         this.radius = radius;

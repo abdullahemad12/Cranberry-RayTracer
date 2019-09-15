@@ -12,12 +12,26 @@ import model.math.Normal;
 import model.math.Point;
 import model.math.Vector;
 
+/**
+ * The DirectionalLight class represents a directional light in the world located at infinity and haven a direction v
+ * @author Abdullah Emad
+ * @version 1.0
+ */
 public class DirectionalLight extends Light {
     private static final double INFINITY_DISTANCE = 10000;
+    /**
+     * the direction of the light
+     */
     private Vector v;
-    public DirectionalLight(Vector v, Color c) {
-        super(c);
-        this.v = v;
+
+    /**
+     *
+     * @param dir direction of the light
+     * @param color light intensity
+     */
+    public DirectionalLight(Vector dir, Color color) {
+        super(color);
+        this.v = dir;
     }
 
     @Override

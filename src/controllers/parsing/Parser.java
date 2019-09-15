@@ -1,7 +1,7 @@
 package controllers.parsing;
 
 import exceptions.InvalidStateException;
-import exceptions.UnkownFileExtensionException;
+import exceptions.UnknownFileExtensionException;
 import model.graphics.ScreenDimensions;
 import model.graphics.light.Attenuation;
 import model.graphics.light.DirectionalLight;
@@ -50,30 +50,58 @@ public class Parser {
     private Color ke;
 
 
+    /**
+     *
+     * @return screen dimensions
+     */
     public ScreenDimensions getScreenDimensions() {
         return screenDimensions;
     }
 
+    /**
+     *
+     * @return the maximum recursion depth of the ray tracer
+     */
     public int getMaxdepth() {
         return maxdepth;
     }
 
+    /**
+     *
+     * @return the filename
+     */
     public String getOutputfilename() {
         return outputfilename;
     }
 
+    /**
+     *
+     * @return the parameters of the camera
+     */
     public double[] getCameraParameters() {
         return cameraParameters;
     }
 
+    /**
+     *
+     * @return the shapes in the world
+     */
     public List<Shape> getShapes() {
         return shapes;
     }
 
+    /**
+     *
+     * @return the lights in the world
+     */
     public List<Light> getLights() {
         return lights;
     }
 
+    /**
+     * the optional attenuation
+     * @return attenuation
+     */
     public Attenuation getAttenuation() {
         return attenuation;
     }
@@ -105,14 +133,21 @@ public class Parser {
         attenuation = new Attenuation();
     }
 
-    public void parseFile(String filename) throws IOException, InvalidStateException, UnkownFileExtensionException {
+    /**
+     *
+     * @param filename the input file name
+     * @throws IOException when there is a problem with the input file
+     * @throws InvalidStateException when the file has invalid syntax
+     * @throws UnknownFileExtensionException when the file is of unknown extension
+     */
+    public void parseFile(String filename) throws IOException, InvalidStateException, UnknownFileExtensionException {
         if(parsed) {
             initialize();
         }
 
         String[] nameComponents = filename.split("\\.");
         if(nameComponents.length != 2 || !nameComponents[1].equals("cbg")){
-            throw new UnkownFileExtensionException(filename);
+            throw new UnknownFileExtensionException(filename);
         }
 
         BufferedReader br = new BufferedReader(new FileReader(filename));

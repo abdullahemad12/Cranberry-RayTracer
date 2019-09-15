@@ -1,6 +1,19 @@
 package model.math.transformation;
 
+/**
+ * Scaling Matrix
+ * @author Abdullah Emad
+ * @version 1.0
+ * @see Matrix
+ */
 public class Scale extends Matrix{
+    /**
+     * Creates a scaling matrix with the given translation values that could be used to
+     * scale a multidimensional component in the three axes
+     * @param x the scale value in the x axis
+     * @param y the scale value in the y axis
+     * @param z the scale value in the z axis
+     */
     public Scale(double x, double y, double z){
         super(initArray(x, y, z));
     }
