@@ -1,6 +1,6 @@
 package exceptions;
 
-public class CranberryException extends Exception {
+abstract public class CranberryException extends Exception {
     public static final int DEFAULT_EXIT_STATUES = 12;
     public final int EXIT_STATUES;
 
