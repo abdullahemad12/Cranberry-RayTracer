@@ -53,12 +53,12 @@ public class Sampler implements Iterable<Sample>{
                 sample = null;
             }
 
-            int oldProgress =(int) (100.0 * ((double)ptr - 1 / (double)(screenDimensions.getHeight() * screenDimensions.getWidth())));
+            int oldProgress =(int) (100.0 * ((double)(ptr - 1) / (double)(screenDimensions.getHeight() * screenDimensions.getWidth())));
             double progress = (100.0 * ((double)ptr / (double)(screenDimensions.getHeight() * screenDimensions.getWidth())));
 
             if((int)progress > oldProgress){
-                Printer.println("Progress: " + progress + "%");
                 Printer.clearScreen();
+                Printer.println("Progress: " + progress + "%");
             }
             return sample;
         }
