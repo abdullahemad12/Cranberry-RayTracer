@@ -2,11 +2,11 @@ package exceptions;
 
 import model.graphics.Sample;
 
-public class InvalidSampleException extends Exception {
+public class InvalidSampleException extends CranberryException {
 
     private Sample sample;
     public InvalidSampleException(Sample sample){
-        super("Invalid Sample with values x: " + sample.getX() + " y: " + sample.getY());
+        super("Invalid Sample with values x: " + sample.getX() + " y: " + sample.getY(), 3);
         this.sample = sample;
     }
 

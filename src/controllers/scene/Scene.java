@@ -3,8 +3,6 @@ package controllers.scene;
 import controllers.parsing.Parser;
 import exceptions.InvalidStateException;
 import exceptions.UnkownFileExtensionException;
-import model.graphics.Intersection;
-import model.graphics.Ray;
 import model.graphics.Sample;
 import model.graphics.ScreenDimensions;
 import model.graphics.object.AggregateShape;
@@ -17,7 +15,6 @@ import java.io.IOException;
 public class Scene {
 
     private RayTracer raytracer;
-    private Camera camera;
     private Sampler sampler;
     private Film film;
     private Parser parser;
@@ -26,11 +23,14 @@ public class Scene {
         parser = new Parser();
         parser.parseFile(filepath);
 
-        initCamera();
+        Camera camera = initCamera();
         sampler = new Sampler(parser.getScreenDimensions());
         initFilm();
         AggregateShape aggregateShape = new AggregateShape(parser.getShapes());
-        raytracer = new RayTracer(aggregateShape, parser.getLights(), parser.getMaxdepth());
+        raytracer = new RayTracer(camera);
+        raytracer.setAggregateShape(aggregateShape);
+        raytracer.setLights(parser.getLights());
+        raytracer.setMaxDepth(parser.getMaxdepth());
 
     }
 
@@ -38,17 +38,7 @@ public class Scene {
 
     public void render() throws Exception {
         for(Sample sample : sampler) {
-            Ray ray = camera.generateRay(sample);
-            Intersection intersection = raytracer.trace(ray);
-            Color color;
-            if(intersection == null) { // no intersection
-                color = new Color(0, 0, 0);
-            }
-            else {
-                Point p = intersection.getLocalGeo().getPos();
-                Vector eyeDir = camera.calculateEyeDirection(p);
-                color = raytracer.performColorShading(intersection, eyeDir);
-            }
+            Color color = raytracer.trace(sample);
             film.commit(sample, color);
         }
         film.writeImage();
@@ -60,7 +50,7 @@ public class Scene {
      * REQUIRES: parser.parseFile() should be called first
      * This function initialize the camera object
      */
-    private void initCamera() {
+    private Camera initCamera() {
         double[] cameraParameters = parser.getCameraParameters();
         ScreenDimensions dims = parser.getScreenDimensions();
         Point eye = new Point(cameraParameters[0], cameraParameters[1], cameraParameters[2]);
@@ -68,7 +58,7 @@ public class Scene {
         Vector up = new Vector(cameraParameters[6], cameraParameters[7], cameraParameters[8]);
         double fovy = cameraParameters[9];
 
-        camera = new Camera(eye, center, up, dims, fovy);
+        return new Camera(eye, center, up, dims, fovy);
     }
 
     /**

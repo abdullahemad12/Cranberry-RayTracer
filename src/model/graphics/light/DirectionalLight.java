@@ -1,5 +1,6 @@
 package model.graphics.light;
 
+import controllers.scene.RayTracer;
 import exceptions.ColorOverflowException;
 import exceptions.PointOutOfRangeException;
 import model.graphics.Intersection;
@@ -32,7 +33,7 @@ public class DirectionalLight extends Light {
         Ray tmp = new Ray(p, dir);
 
         try {
-            p = tmp.ray(0.0001);
+            p = tmp.ray(RayTracer.ERROR_EPSILON);
         } catch (PointOutOfRangeException e) {
             e.printStackTrace();
             System.exit(3);

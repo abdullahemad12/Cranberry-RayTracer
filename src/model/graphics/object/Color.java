@@ -62,6 +62,14 @@ public class Color {
         return new Color(r,g ,b);
     }
 
+    public Color pow(double a) {
+        double r = Math.pow(this.r, a);
+        double g = Math.pow(this.g, a);
+        double b = Math.pow(this.b, a);
+
+        return new Color(r, g, b);
+    }
+
     public Color multiply(double a) throws ColorOverflowException {
         double r = this.r * a;
         double g = this.g * a;

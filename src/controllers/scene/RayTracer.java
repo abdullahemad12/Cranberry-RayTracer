@@ -4,6 +4,7 @@ import app.format.Printer;
 import exceptions.ColorOverflowException;
 import exceptions.PointOutOfRangeException;
 import model.graphics.Intersection;
+import model.graphics.LocalGeo;
 import model.graphics.Ray;
 import model.graphics.Sample;
 import model.graphics.light.Light;
@@ -11,12 +12,15 @@ import model.graphics.object.AggregateShape;
 import model.graphics.object.BRDF;
 import model.graphics.object.Color;
 import model.graphics.object.Shape;
+import model.math.Normal;
 import model.math.Point;
 import model.math.Vector;
 
 import java.util.List;
 
 public class RayTracer {
+
+    public static final double ERROR_EPSILON = 0.0001;
 
     private AggregateShape aggregateShape;
     private List<Light> lights;
@@ -54,6 +58,9 @@ public class RayTracer {
 
     private Color trace(Ray ray, int depth) {
 
+        if(depth == 0) {
+            return new Color(0, 0,0);
+        }
         // no Intersection with any object, return a black color
         if(!aggregateShape.doesIntersect(ray)) {
             return new Color(0, 0, 0);
@@ -65,13 +72,34 @@ public class RayTracer {
             // at this point there must be an implementation error
             // thus print stack trace and terminate the program
             e.printStackTrace();
-            System.exit(1);
+            System.exit(e.EXIT_STATUES);
         }
 
         assert(intersection != null);
 
         // Perform standard Color Shading
-        return performColorShading(intersection);
+        Color color = performColorShading(intersection);
+
+        // compute reflection component
+        Ray reflectionRay = computeReflectionRay(ray, intersection.getLocalGeo());
+        Color reflection = trace(reflectionRay, depth - 1);
+        Color ks = intersection.getShape().getBRDF().getSpecular();
+        reflection = reflection.multiply(ks);
+
+        try{
+            color = color.add(reflection);
+        } catch (ColorOverflowException e) {
+            try {
+                color = color.add(new Color(0, 0, 0));
+            } catch(ColorOverflowException e1) {
+                Printer.printError("FATAL Error: should never throw this exception!");
+                e1.printStackTrace();
+                System.exit(e1.EXIT_STATUES);
+            }
+        }
+
+        return color;
+
     }
 
     /**
@@ -89,10 +117,10 @@ public class RayTracer {
         try {
             color = brdf.getAmbient().add(brdf.getEmission());
         } catch(ColorOverflowException e) {
-            Printer.printError("Fatal Error: ");
             e.printStackTrace();
-            System.exit(4);
+            System.exit(e.EXIT_STATUES);
         }
+
         for(Light light : lights) {
 
             // shadowing: cast a ray to the light and check if hits an object in the
@@ -116,9 +144,29 @@ public class RayTracer {
             } catch(ColorOverflowException e) {
                 Printer.printError("Fatal Error: ");
                 e.printStackTrace();
-                System.exit(4);
+                System.exit(e.EXIT_STATUES);
             }
         }
         return color;
+    }
+
+    private Ray computeReflectionRay(Ray originalRay, LocalGeo lg) {
+        Vector direction = originalRay.getDir();
+        Normal normal = lg.getNormal();
+
+        Vector newDirection = direction.subtract(normal.multiply(2.0 * normal.dot(direction)));
+        newDirection = newDirection.normalize();
+
+        Point pos = lg.getPos();
+        Ray tmp = new Ray(pos, newDirection);
+        try {
+            // add epsilon for numerical errors
+            pos = tmp.ray(ERROR_EPSILON);
+        } catch (PointOutOfRangeException e){
+            e.printStackTrace();
+            System.exit(e.EXIT_STATUES);
+        }
+
+        return new Ray(pos, newDirection);
     }
 }

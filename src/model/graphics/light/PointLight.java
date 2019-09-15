@@ -1,5 +1,6 @@
 package model.graphics.light;
 
+import controllers.scene.RayTracer;
 import exceptions.ColorOverflowException;
 import exceptions.PointOutOfRangeException;
 import model.graphics.Intersection;
@@ -35,7 +36,7 @@ public class PointLight extends Light {
         Ray tmp = new Ray(pos, dir);
 
         try{
-            pos = tmp.ray(0.0001);
+            pos = tmp.ray(RayTracer.ERROR_EPSILON);
         } catch(PointOutOfRangeException e) {
             e.printStackTrace();
             System.exit(3);

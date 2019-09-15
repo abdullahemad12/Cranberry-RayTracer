@@ -3,11 +3,11 @@ package exceptions;
 import controllers.parsing.States;
 import controllers.parsing.Transitions;
 
-public class InvalidStateException extends Exception{
+public class InvalidStateException extends CranberryException{
 
     private String message;
     public InvalidStateException(States oldState, Transitions transition, int lineNumber){
-        super("Invalid File Syntax!");
+        super("Invalid File Syntax!", 4);
 
         String lineNumberMessage = "Line " + lineNumber + " : ";
         if(oldState == States.START){
@@ -47,6 +47,7 @@ public class InvalidStateException extends Exception{
         message = lineNumberMessage + message;
     }
     public InvalidStateException(String command) {
+        super(4);
         message = command;
     }
 

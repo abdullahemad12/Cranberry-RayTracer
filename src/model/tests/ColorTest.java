@@ -33,8 +33,9 @@ public class ColorTest {
         try {
             color = color.add(color2);
         } catch (ColorOverflowException e) {
-            Assert.fail("should not throw an Exception!");
+            Assert.fail("should not throw an Exception");
         }
+
 
         Assert.assertEquals(color.getR(), r + 0.5, 0.001);
         Assert.assertEquals(color.getG(), g + 0.7, 0.001);
@@ -47,9 +48,10 @@ public class ColorTest {
     public void colorAdditionTest1(){
         Color color2 = new Color(0.9, 0.7, 0.6);
 
+
         try {
             color.add(color2);
-            Assert.fail("should throw an Exception !");
+            Assert.fail("Should throw an Exception");
         } catch (ColorOverflowException e) {
             Assert.assertTrue(true);
         }
@@ -62,10 +64,11 @@ public class ColorTest {
 
         try {
             color.add(color2);
-            Assert.fail("should throw an Exception !");
+            Assert.fail("Should throw an Exception");
         } catch (ColorOverflowException e) {
             Assert.assertTrue(true);
         }
+
 
     }
 
