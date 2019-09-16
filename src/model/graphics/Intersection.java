@@ -3,8 +3,8 @@ package model.graphics;
 import model.graphics.object.Shape;
 
 /**
- * @author Abdullah Emad
  * The Intersection class is a data holder for a Shape and the localGeo of it's intersection with a ray
+ * @author Abdullah Emad
  */
 public class Intersection {
     /**
