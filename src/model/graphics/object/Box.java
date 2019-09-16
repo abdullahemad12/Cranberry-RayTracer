@@ -1,7 +1,5 @@
 package model.graphics.object;
 
-import datastructures.OctaTree.BoundingBox;
-import datastructures.OctaTree.OctaTreeObject;
 import exceptions.PointOutOfRangeException;
 import model.graphics.LocalGeo;
 import model.graphics.Ray;
@@ -16,7 +14,7 @@ import model.math.transformation.Matrix;
  * @author Abdullah Emad
  * @version 1.0
  */
-public class Box implements Shape, OctaTreeObject {
+public class Box implements Shape {
 
     private Point A;
     private Point B;
@@ -39,7 +37,7 @@ public class Box implements Shape, OctaTreeObject {
     public Point getB() { return B; }
 
     @Override
-    public boolean isOverlapping(BoundingBox boundingBox) {
+    public boolean isOverlapping(Box boundingBox) {
         boolean cond1 = this.B.getX() < boundingBox.getA().getX();
         boolean cond2 = boundingBox.getB().getX() < this.getA().getX();
 
@@ -130,6 +128,17 @@ public class Box implements Shape, OctaTreeObject {
         return null;
     }
 
+    @Override
+    public Box calculateBoundingBox() {
+        return this;
+    }
+
+    public double getVolume(){
+        double w = Math.abs(B.getX()- A.getX());
+        double h = Math.abs(B.getY() - A.getY());
+        double l = Math.abs(B.getZ() - A.getZ());
+        return w * h * l;
+    }
     private static void swap(double[] arr1, double[] arr2, int i) {
         double tmp = arr1[i];
         arr1[i] = arr2[i];

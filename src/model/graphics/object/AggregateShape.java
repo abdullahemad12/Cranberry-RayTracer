@@ -1,5 +1,6 @@
 package model.graphics.object;
 
+import datastructures.OctaTree.Octree;
 import exceptions.PointOutOfRangeException;
 import model.graphics.Intersection;
 import model.graphics.LocalGeo;
@@ -18,6 +19,7 @@ import java.util.List;
 public class AggregateShape {
 
     private HashSet<Shape> shapes;
+    private Octree octree;
 
     public AggregateShape() {
         this.shapes = new HashSet<>();
@@ -25,6 +27,8 @@ public class AggregateShape {
     public AggregateShape(List<Shape> shapes) {
         this.shapes = new HashSet<>();
         addAllShapes(shapes);
+        octree = new Octree(shapes);
+
     }
 
     /**
@@ -63,6 +67,11 @@ public class AggregateShape {
      */
     public Intersection intersect(Ray ray) throws PointOutOfRangeException {
 
+        HashSet<Shape> shapes = octree.search(ray);
+
+        if(shapes == null) {
+            throw new PointOutOfRangeException();
+        }
         Shape closestShape = null;
         LocalGeo closestLocalGeo = null;
 
@@ -91,6 +100,7 @@ public class AggregateShape {
      * @return true if the ray intersects with any object, false otherwise
      */
     public boolean doesIntersect(Ray ray){
+        HashSet<Shape> shapes = octree.search(ray);
         for(Shape shape : shapes){
             if(shape.doesIntersect(ray)) {
                 return true;

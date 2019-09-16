@@ -17,6 +17,7 @@ public interface Shape {
     /**
      * The intersect function calculates the intersection of ray with this shape. It is recommended
      * to check if the ray actually intersects with this Shape using doesIntersect() before calling this method
+     *
      * @param ray the ray that should be intersected by the object
      * @return LocalGeo containing information of the intersection
      * @throws PointOutOfRangeException if the ray does not intersect
@@ -25,6 +26,7 @@ public interface Shape {
 
     /**
      * Checks if the given ray intersects with this Shape
+     *
      * @param ray the ray to be intersected
      * @return true if the ray intersects with this shape, false otherwise
      */
@@ -32,13 +34,30 @@ public interface Shape {
 
     /**
      * Performs the given transformation on this shape
+     *
      * @param matrix the matrix that represents the desired transformation
      */
     void transform(Matrix matrix);
 
     /**
      * Getter for the BRDF
+     *
      * @return the BRDF of the shape
      */
     BRDF getBRDF();
+
+    /**
+     * computes the bounding box of this Shape
+     *
+     * @return the bounding box as a Box
+     */
+    Box calculateBoundingBox();
+
+    /**
+     * Checks if the bounding box of the shape overlaps with the given bounding box
+     *
+     * @param boundingBox the bounding box to be checked
+     * @return true if it overlaps, false otherwise
+     */
+    boolean isOverlapping(Box boundingBox);
 }

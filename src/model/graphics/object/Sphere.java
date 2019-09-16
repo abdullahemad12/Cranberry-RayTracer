@@ -1,8 +1,6 @@
 package model.graphics.object;
 
 import controllers.scene.RayTracer;
-import datastructures.OctaTree.BoundingBox;
-import datastructures.OctaTree.OctaTreeObject;
 import exceptions.PointOutOfRangeException;
 import model.graphics.LocalGeo;
 import model.graphics.Ray;
@@ -18,7 +16,7 @@ import model.math.transformation.Matrix;
  * by the coordinates of its center and the length of its radius
  * The Sphere class implements the Shape interface
  */
-public class Sphere implements Shape, OctaTreeObject {
+public class Sphere implements Shape {
 
     /**
      * the lighting material of the sphere
@@ -131,7 +129,7 @@ public class Sphere implements Shape, OctaTreeObject {
     }
 
     @Override
-    public boolean isOverlapping(BoundingBox boundingBox) {
+    public Box calculateBoundingBox() {
         Point A = new Point(this.center.getX() - radius - RayTracer.ERROR_EPSILON,
                 this.center.getY() - radius - RayTracer.ERROR_EPSILON,
                 this.center.getZ() - radius - RayTracer.ERROR_EPSILON);
@@ -139,9 +137,13 @@ public class Sphere implements Shape, OctaTreeObject {
         Point B = new Point(this.center.getX() + radius + RayTracer.ERROR_EPSILON,
                 this.center.getY() + radius + RayTracer.ERROR_EPSILON,
                 this.center.getZ() + radius + RayTracer.ERROR_EPSILON);
-        Box box = new Box(A, B);
+        return new Box(A, B);
+    }
 
+    @Override
+    public boolean isOverlapping(Box boundingBox) {
 
+        Box box = calculateBoundingBox();
         return box.isOverlapping(boundingBox);
     }
 }

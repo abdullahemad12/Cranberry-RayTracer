@@ -1,7 +1,5 @@
 package model.graphics.object;
 
-import datastructures.OctaTree.BoundingBox;
-import datastructures.OctaTree.OctaTreeObject;
 import exceptions.PointOutOfRangeException;
 import model.graphics.LocalGeo;
 import model.graphics.Ray;
@@ -20,7 +18,7 @@ import model.math.transformation.Matrix;
  * @author Abdullah Emad
  * @version 1.0
  */
-public class Triangle implements Shape, OctaTreeObject {
+public class Triangle implements Shape {
 
     /**
      * First point of the triangle
@@ -137,7 +135,7 @@ public class Triangle implements Shape, OctaTreeObject {
     }
 
     @Override
-    public boolean isOverlapping(BoundingBox boundingBox) {
+    public Box calculateBoundingBox() {
         double minX = min(A.getX(), B.getX(), C.getX());
         double minY = min(A.getY(), B.getY(), C.getY());
         double minZ = min(A.getZ(), B.getZ(), C.getZ());
@@ -146,9 +144,16 @@ public class Triangle implements Shape, OctaTreeObject {
         double maxY = max(A.getY(), B.getY(), C.getY());
         double maxZ = max(A.getZ(), B.getZ(), C.getZ());
 
-        Box b = new Box(new Point(minX, minY, minZ), new Point(maxX, maxY, maxZ));
+        return new Box(new Point(minX, minY, minZ), new Point(maxX, maxY, maxZ));
+
+    }
+
+    @Override
+    public boolean isOverlapping(Box boundingBox) {
+        Box b = calculateBoundingBox();
         return b.isOverlapping(boundingBox);
     }
+
 
     private static double min(double a, double b, double c) {
         return Double.min(a, Double.min(b, c));

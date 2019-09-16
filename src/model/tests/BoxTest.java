@@ -1,4 +1,3 @@
-import datastructures.OctaTree.BoundingBox;
 import model.graphics.Ray;
 import model.graphics.object.Box;
 import model.math.Point;
@@ -48,7 +47,7 @@ public class BoxTest {
     public void boxOverlappingTest1() {
         Box b1 = new Box(new Point(1, 1, 1), new Point(3, 3, 3));
 
-        BoundingBox b2 = new BoundingBox(new Point(2, 2, 2), new Point(2.5, 2.5, 5));
+        Box b2 = new Box(new Point(2, 2, 2), new Point(2.5, 2.5, 5));
 
         Assert.assertTrue(b1.isOverlapping(b2));
     }
@@ -57,7 +56,7 @@ public class BoxTest {
     public void boxOverlappingTest2() {
         Box b1 = new Box(new Point(4, 4, 5), new Point(7, 5, 6));
 
-        BoundingBox b2 = new BoundingBox(new Point(2, 2, 2), new Point(2.5, 2.5, 5));
+        Box b2 = new Box(new Point(2, 2, 2), new Point(2.5, 2.5, 5));
 
         Assert.assertFalse(b1.isOverlapping(b2));
     }
@@ -66,7 +65,7 @@ public class BoxTest {
     public void boxOverlappingTest3() {
         Box b1 = new Box(new Point(4, 4, 5), new Point(7, 5, 6));
 
-        BoundingBox b2 = new BoundingBox(new Point(5, 5, 5.5), new Point(9, 20, 50));
+        Box b2 = new Box(new Point(5, 5, 5.5), new Point(9, 20, 50));
 
         Assert.assertTrue(b1.isOverlapping(b2));
 
