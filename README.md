@@ -12,4 +12,8 @@ A Ray Tracer engine that can render different scenes with interesting effects.
 6. Support for reflections.
 
 
-Cranberry ray tracer can produce images with shadows and reflections
+
+#Getting Started
+# Images produced by cranberry Ray tracer
+
+
