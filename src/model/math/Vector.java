@@ -122,6 +122,15 @@ public class Vector extends MultiDimComponent{
     }
 
     /**
+     * <b>EFFECTS: <b/>performs an element-wise division operation on two vectors this / vec
+     * @param vec the vector that divides this
+     * @return the result of the division as a Vector
+     */
+    public Vector divide(Vector vec) {
+        return new Vector(x / vec.x, y / vec.y, z / vec.z);
+    }
+
+    /**
      * <b>EFFECTS: <b/> calculate the magnitude of this vector
      * @return the length of the vector
      */
