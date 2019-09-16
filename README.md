@@ -1,3 +1,5 @@
+<h1><img src ="docs/Art/cranberries_white_small.png" alt = "cranberries" width="12%">Cranberry Heap</h1>
+
 # Cranberry Ray Tracer
 
 A Ray Tracer engine that can render different scenes with interesting effects.
