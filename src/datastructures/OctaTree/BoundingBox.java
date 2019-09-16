@@ -1,7 +1,5 @@
 package datastructures.OctaTree;
 
-import app.format.Printer;
-import exceptions.CranberryException;
 import model.graphics.object.Box;
 import model.graphics.object.Shape;
 
@@ -18,10 +16,6 @@ class BoundingBox extends Box {
      */
     BoundingBox(Box box,  List<Shape> shapes) {
         super(box.getA(), box.getB());
-        if(shapes.size() == 0) {
-            Printer.printError("Fatal Error in BoundingBox.java: should never enter the condition in this line");
-            System.exit(CranberryException.DEFAULT_EXIT_STATUES);
-        }
         this.shapes = shapes;
         boundingBoxes = new BoundingBox[8];
 

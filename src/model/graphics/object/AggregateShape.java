@@ -18,44 +18,13 @@ import java.util.List;
  */
 public class AggregateShape {
 
-    private HashSet<Shape> shapes;
     private Octree octree;
 
-    public AggregateShape() {
-        this.shapes = new HashSet<>();
-    }
     public AggregateShape(List<Shape> shapes) {
-        this.shapes = new HashSet<>();
-        addAllShapes(shapes);
         octree = new Octree(shapes);
 
     }
 
-    /**
-     * <b>EFFECTS: <b/>Adds a list of shapes to this aggregate shape
-     * <b>MODIFIES: <b/>this
-     * @param shapes the list of shapes to be added
-     */
-    public void addAllShapes(List<Shape> shapes) {
-        this.shapes.addAll(shapes);
-    }
-
-    /**
-     * <b>EFFECTS: <b/>Adds one shape to this aggregate shape
-     * <b>MODIFIES: <b/>this
-     * @param shape the shape to be added
-     */
-    public void addShape(Shape shape) {
-        this.shapes.add(shape);
-    }
-
-    /**
-     * <b>EFFECTS: <b/>deletes all the shapes from this aggregate shape
-     * <b>MODIFIES: <b/> this
-      */
-    public void clearShapes() {
-        shapes.clear();
-    }
 
     /**
      * <b>EFFECTS<b/>Tries to intersect the ray with all the shapes in this aggregate shape
@@ -101,6 +70,9 @@ public class AggregateShape {
      */
     public boolean doesIntersect(Ray ray){
         HashSet<Shape> shapes = octree.search(ray);
+        if(shapes == null) {
+            return false;
+        }
         for(Shape shape : shapes){
             if(shape.doesIntersect(ray)) {
                 return true;

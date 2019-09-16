@@ -11,7 +11,6 @@ import model.graphics.light.Light;
 import model.graphics.object.AggregateShape;
 import model.graphics.object.BRDF;
 import model.graphics.object.Color;
-import model.graphics.object.Shape;
 import model.math.Normal;
 import model.math.Point;
 import model.math.Vector;
@@ -52,9 +51,6 @@ public class RayTracer {
         this.maxDepth = maxDepth;
     }
 
-    void addToAggregateShape(Shape shape) {
-        aggregateShape.addShape(shape);
-    }
 
     void addLight(Light light) {
         this.lights.add(light);

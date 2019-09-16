@@ -38,7 +38,7 @@ public class AggregateShapeTest {
 
     @Test
     public void AggregateShapeTest1() throws InvalidSampleException {
-        AggregateShape as = new AggregateShape();
+        AggregateShape as = new AggregateShape(new LinkedList<>());
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -59,10 +59,10 @@ public class AggregateShapeTest {
 
     @Test
     public void AggregateShapeTest2() throws InvalidSampleException {
-        AggregateShape as = new AggregateShape();
         Sphere sphere = new Sphere(center, 2.2, null);
-
-        as.addShape(sphere);
+        List<Shape> shapes = new LinkedList<>();
+        shapes.add(sphere);
+        AggregateShape as = new AggregateShape(shapes);
 
         Sample sample = new Sample((width/ 2) + 1, (height / 2) + 1);
         Ray ray = camera.generateRay(sample);
@@ -84,14 +84,13 @@ public class AggregateShapeTest {
 
     @Test
     public void AggregateShapeTest3() throws InvalidSampleException {
-        AggregateShape as = new AggregateShape();
         List<Shape> shapes = new LinkedList<>();
         for(int i = 0; i < 50 ; i++){
             Point p = new Point(center.getX() + i, center.getY(), center.getZ());
             Sphere sphere = new Sphere(p, 2.2, null);
-            as.addShape(sphere);
             shapes.add(sphere);
         }
+        AggregateShape as = new AggregateShape(shapes);
 
         Sample sample = new Sample(width / 2, height / 2);
         Ray ray = camera.generateRay(sample);
@@ -110,7 +109,6 @@ public class AggregateShapeTest {
 
     @Test
     public void AggregateShapeTest4() throws InvalidSampleException{
-        AggregateShape as = new AggregateShape();
         List<Shape> shapes = new LinkedList<>();
 
         Shape targetShape = null;
@@ -131,7 +129,8 @@ public class AggregateShapeTest {
             shapes.add(shape);
         }
 
-        as.addAllShapes(shapes);
+        AggregateShape as = new AggregateShape(shapes);
+
 
         Sample sample = new Sample(width / 2, height / 2);
 
