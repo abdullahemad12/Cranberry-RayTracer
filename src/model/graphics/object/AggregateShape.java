@@ -1,6 +1,5 @@
 package model.graphics.object;
 
-import datastructures.OctaTree.Octree;
 import exceptions.PointOutOfRangeException;
 import model.graphics.Intersection;
 import model.graphics.LocalGeo;
@@ -18,13 +17,42 @@ import java.util.List;
  */
 public class AggregateShape {
 
-    private Octree octree;
+    private HashSet<Shape> shapes;
 
+    public AggregateShape() {
+        this.shapes = new HashSet<>();
+    }
     public AggregateShape(List<Shape> shapes) {
-        octree = new Octree(shapes);
+        this.shapes = new HashSet<>();
+        addAllShapes(shapes);
 
     }
 
+    /**
+     * <b>EFFECTS: <b/>Adds a list of shapes to this aggregate shape
+     * <b>MODIFIES: <b/>this
+     * @param shapes the list of shapes to be added
+     */
+    public void addAllShapes(List<Shape> shapes) {
+        this.shapes.addAll(shapes);
+    }
+
+    /**
+     * <b>EFFECTS: <b/>Adds one shape to this aggregate shape
+     * <b>MODIFIES: <b/>this
+     * @param shape the shape to be added
+     */
+    public void addShape(Shape shape) {
+        this.shapes.add(shape);
+    }
+
+    /**
+     * <b>EFFECTS: <b/>deletes all the shapes from this aggregate shape
+     * <b>MODIFIES: <b/> this
+      */
+    public void clearShapes() {
+        shapes.clear();
+    }
 
     /**
      * <b>EFFECTS<b/>Tries to intersect the ray with all the shapes in this aggregate shape
@@ -36,11 +64,6 @@ public class AggregateShape {
      */
     public Intersection intersect(Ray ray) throws PointOutOfRangeException {
 
-        HashSet<Shape> shapes = octree.search(ray);
-
-        if(shapes == null) {
-            throw new PointOutOfRangeException();
-        }
         Shape closestShape = null;
         LocalGeo closestLocalGeo = null;
 
@@ -69,10 +92,6 @@ public class AggregateShape {
      * @return true if the ray intersects with any object, false otherwise
      */
     public boolean doesIntersect(Ray ray){
-        HashSet<Shape> shapes = octree.search(ray);
-        if(shapes == null) {
-            return false;
-        }
         for(Shape shape : shapes){
             if(shape.doesIntersect(ray)) {
                 return true;
