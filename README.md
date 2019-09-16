@@ -167,6 +167,7 @@ More examples can be found at the [scenese](scenes/) folder in the project
 
 
 # Documentation
+![uml](docs/uml.png "uml")
 
 
-
+Full documentation for Developers and contributors can be found [here](https://abdullahemad12.github.io/CranberryRayTracerDocs/)
