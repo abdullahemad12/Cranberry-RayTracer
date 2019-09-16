@@ -1,5 +1,7 @@
 <h1><img src ="docs/Art/cranberries_white_small.png" alt = "cranberries" width="12%">Cranberry Ray Tracer</h1>
 
+[![first-timers-only](https://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat-square)](https://www.firsttimersonly.com/)
+[![Gitter](https://badges.gitter.im/CraberryRayTracer/community.svg)](https://gitter.im/CraberryRayTracer/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 A Ray Tracer engine that can render different scenes with interesting effects.
 
