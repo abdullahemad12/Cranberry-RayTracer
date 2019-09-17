@@ -41,7 +41,7 @@ public class Camera {
         this.screenDimensions = screenDimensions;
         this.eye = eye;
 
-        double aspect_ratio = screenDimensions.getWidth() / screenDimensions.getHeight();
+        double aspect_ratio = (double)screenDimensions.getWidth() / (double)screenDimensions.getHeight();
         double fovy_rads = Math.toRadians(fovy);
         double fovy_rads_tan = Math.tan(fovy_rads / 2);
         double fovx_rads = 2 * Math.atan(aspect_ratio * fovy_rads_tan);
