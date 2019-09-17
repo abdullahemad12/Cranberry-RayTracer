@@ -27,11 +27,9 @@ The only thing you need to have installed in order to run this program is:
 
 ## Running
 
-1. clone or download the source code as a zip then extract.
-2. Navigate to the source directory.
-3. from the source directoy, navigate to out/artifacts/CranberryRayTracer_jar where the jar executable is stored
-4. Copy the CranberryRayTracer.jar file to whatever folder you want (Optional)
-5. Open up the terminal and cd to the directory where CranberryRayTracer.jar is located currently.
+1. Press on the releases button on the github page of this project.
+2. Download the .jar binary for the project.
+5. Open up the terminal and cd to the directory where CranberryRayTracer.jar was downloaded.
 6. Run the following command
 
 `java -jar CranberryRayTracer.jar -i path/to/inputfile.cbg`
