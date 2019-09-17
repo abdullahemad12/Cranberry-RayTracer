@@ -56,18 +56,25 @@ public class Color {
      * @return the resulting color as a Color object
      */
     public Color add(Color c) throws ColorOverflowException {
-        if(this.r + c.r > 1){
-            throw new ColorOverflowException(this.r + c.r);
-        }
-        if(this.g + c.g > 1) {
-            throw new ColorOverflowException(this.g + c.g);
-        }
-        if(this.b + c.b > 1) {
-            throw new ColorOverflowException(this.b + c.b);
-        }
+
         double r = (this.r + c.r);
         double g = (this.g + c.g);
         double b = (this.b + c.b);
+
+        r = r > 1 ? 1 : r;
+        g = g > 1 ? 1 : g;
+        b = b > 1 ? 1 : b;
+
+        if(r > 1) {
+            throw new ColorOverflowException(r);
+        }
+        if(g > 1) {
+            throw new ColorOverflowException(g);
+        }
+        if(b > 1) {
+            throw new ColorOverflowException(b);
+        }
+
 
         return new Color(r, g, b);
     }
@@ -94,6 +101,8 @@ public class Color {
         double r = this.r * a;
         double g = this.g * a;
         double b = this.b * a;
+
+
         if(r > 1) {
             throw new ColorOverflowException(r);
         }
