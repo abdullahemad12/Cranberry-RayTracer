@@ -155,14 +155,17 @@ More examples can be found at the [scenese](scenes/) folder in the project
 
 # Sample scenes produced by Cranberry Ray Tracer
 
-![scene1](docs/scene4-diffuse.png "Diffuse")
+![scene1](docs/scene4-ambient.png "Ambient")
 
-![scene2](docs/scene4-specular.png "Specular")
+![scene2](docs/scene4-diffuse.png "Diffuse")
 
-![scene3](docs/scene5.png "scene5")
+![scene3](docs/scene4-specular.png "Specular")
 
-![scene4](docs/scene6.png "scene6")
+![scene4](docs/scene5.png "scene5")
 
+![scene5](docs/scene6.png "scene6")
+
+![scene6](docs/scene8.png "scene8")
 
 # Documentation
 ![uml](docs/uml.png "uml")
